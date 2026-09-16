@@ -652,9 +652,9 @@
 
 | Date | Problem | Difficulty | Language |
 |------|----------|------------|----------|
+| 16 Sep 2026 | Rectangle Overlap | 🟢 Easy | Elixir |
 | 16 Sep 2026 | Count Commas in Range | 🟢 Easy | C# |
 | 16 Sep 2026 | Search Insert Position | 🟢 Easy | Java |
-| 16 Sep 2026 | Rectangle Overlap | 🟢 Easy | C++ |
 | 15 Aug 2026 | Maximum Length Substring With Two Occurrences | 🟢 Easy | C++ |
 | 11 Aug 2026 | Number of Good Pairs | 🟢 Easy | C++ |
 | 11 Aug 2026 | Nth Digit | 🟡 Medium | C++ |

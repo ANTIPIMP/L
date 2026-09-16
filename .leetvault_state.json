@@ -144,7 +144,7 @@
     {
       "title": "Rectangle Overlap",
       "slug": "rectangle-overlap",
-      "qid": 866,
+      "qid": "866",
       "files": [
         {
           "filename": "solution.cpp",
@@ -156,6 +156,17 @@
           "timestamp": 1789550421,
           "note": "",
           "id": 2143495675
+        },
+        {
+          "filename": "solution.ex",
+          "language": "elixir",
+          "code": "defmodule Solution do\n  @spec is_rectangle_overlap(rec1 :: [integer], rec2 :: [integer]) :: boolean\n  def is_rectangle_overlap([x1, y1, x2, y2], [x3, y3, x4, y4]) do\n    x4 > x1 and y4 > y1 and x3 < x2 and y3 < y2\n  end\nend",
+          "runtime": "0 ms",
+          "memory": "56.4 MB",
+          "status": "Accepted",
+          "timestamp": 1789556560,
+          "note": "",
+          "id": 2143575403
         }
       ],
       "questionId": "866",

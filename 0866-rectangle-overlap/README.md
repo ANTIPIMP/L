@@ -80,6 +80,7 @@ No notes provided.
 | Language | Runtime | Memory | File |
 |----------|---------|--------|------|
 | C++ | 0 ms | 9.8 MB | [solution.cpp](./solution.cpp) |
+| Elixir | 0 ms | 56.4 MB | [solution.ex](./solution.ex) |
 
 ---
 Generated automatically using [LeetVault](https://github.com/vedant476/LeetVault).
