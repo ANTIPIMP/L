@@ -1,0 +1,48 @@
+{
+  "stats": {
+    "total": 1,
+    "easy": 1,
+    "medium": 0,
+    "hard": 0,
+    "languages": [
+      "Java"
+    ],
+    "lastSync": "16 Sep 2026"
+  },
+  "problems": [
+    {
+      "title": "Search Insert Position",
+      "slug": "search-insert-position",
+      "qid": "35",
+      "files": [
+        {
+          "filename": "Solution.java",
+          "language": "java",
+          "code": "class Solution {\n    public int searchInsert(int[] nums, int target) {\n        int start = 0;\n        int end = nums.length-1;\n\n        while (start <= end) {\n            int mid = start + (end-start)/2;\n            if (nums[mid] == target) return mid;\n            else if (nums[mid] > target) end = mid-1;\n            else start = mid+1;\n        }\n\n        return start;\n    }\n}",
+          "runtime": "0 ms",
+          "memory": "44.4 MB",
+          "status": "Accepted",
+          "timestamp": 1789552299,
+          "note": "",
+          "id": 2143520421
+        }
+      ],
+      "questionId": "35",
+      "url": "https://leetcode.com/problems/search-insert-position/",
+      "difficulty": "Easy",
+      "tags": [
+        {
+          "name": "Array",
+          "slug": "array"
+        },
+        {
+          "name": "Binary Search",
+          "slug": "binary-search"
+        }
+      ],
+      "likes": 19211,
+      "dislikes": 915,
+      "paidOnly": false
+    }
+  ]
+}
