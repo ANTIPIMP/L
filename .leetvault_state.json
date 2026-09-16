@@ -1,10 +1,11 @@
 {
   "stats": {
-    "total": 1,
-    "easy": 1,
+    "total": 2,
+    "easy": 2,
     "medium": 0,
     "hard": 0,
     "languages": [
+      "C#",
       "Java"
     ],
     "lastSync": "16 Sep 2026"
@@ -42,6 +43,36 @@
       ],
       "likes": 19211,
       "dislikes": 915,
+      "paidOnly": false
+    },
+    {
+      "title": "Count Commas in Range",
+      "slug": "count-commas-in-range",
+      "qid": "4245",
+      "files": [
+        {
+          "filename": "Solution.cs",
+          "language": "csharp",
+          "code": "public class Solution {\n    public int CountCommas(int n) {\n        return n-999>0? n-999:0;\n    }\n}",
+          "runtime": "0 ms",
+          "memory": "28.7 MB",
+          "status": "Accepted",
+          "timestamp": 1789552644,
+          "note": "",
+          "id": 2143524865
+        }
+      ],
+      "questionId": "4245",
+      "url": "https://leetcode.com/problems/count-commas-in-range/",
+      "difficulty": "Easy",
+      "tags": [
+        {
+          "name": "Math",
+          "slug": "math"
+        }
+      ],
+      "likes": 297,
+      "dislikes": 27,
       "paidOnly": false
     }
   ]

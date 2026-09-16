@@ -2,11 +2,11 @@
 
 > Automatically synchronized using **LeetVault**
 
-[![Problems](https://img.shields.io/badge/Problems-1-blue)]()
-[![Easy](https://img.shields.io/badge/Easy-1-success)]()
+[![Problems](https://img.shields.io/badge/Problems-2-blue)]()
+[![Easy](https://img.shields.io/badge/Easy-2-success)]()
 [![Medium](https://img.shields.io/badge/Medium-0-orange)]()
 [![Hard](https://img.shields.io/badge/Hard-0-red)]()
-[![Languages](https://img.shields.io/badge/Languages-1-blueviolet)]()
+[![Languages](https://img.shields.io/badge/Languages-2-blueviolet)]()
 
 ---
 
@@ -14,11 +14,11 @@
 
 | Metric | Count |
 |---------|------:|
-| Problems Solved | 1 |
-| Easy | 1 |
+| Problems Solved | 2 |
+| Easy | 2 |
 | Medium | 0 |
 | Hard | 0 |
-| Languages | Java |
+| Languages | C#, Java |
 | Last Sync | 16 Sep 2026 |
 
 ---
@@ -41,10 +41,19 @@
 
 ---
 
+## Math (1)
+
+| # | Problem | Difficulty | Solution |
+|---|---------|------------|----------|
+| 4245 | Count Commas in Range | 🟢 Easy | [View](./4245-count-commas-in-range/) |
+
+---
+
 # 🔥 Recently Solved
 
 | Date | Problem | Difficulty | Language |
 |------|----------|------------|----------|
+| 16 Sep 2026 | Count Commas in Range | 🟢 Easy | C# |
 | 16 Sep 2026 | Search Insert Position | 🟢 Easy | Java |
 
 ---
