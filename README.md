@@ -2,9 +2,9 @@
 
 > Automatically synchronized using **LeetVault**
 
-[![Problems](https://img.shields.io/badge/Problems-62-blue)]()
-[![Easy](https://img.shields.io/badge/Easy-25-success)]()
-[![Medium](https://img.shields.io/badge/Medium-26-orange)]()
+[![Problems](https://img.shields.io/badge/Problems-68-blue)]()
+[![Easy](https://img.shields.io/badge/Easy-27-success)]()
+[![Medium](https://img.shields.io/badge/Medium-30-orange)]()
 [![Hard](https://img.shields.io/badge/Hard-11-red)]()
 [![Languages](https://img.shields.io/badge/Languages-25-blueviolet)]()
 
@@ -14,12 +14,12 @@
 
 | Metric | Count |
 |---------|------:|
-| Problems Solved | 62 |
-| Easy | 25 |
-| Medium | 26 |
+| Problems Solved | 68 |
+| Easy | 27 |
+| Medium | 30 |
 | Hard | 11 |
 | Languages | Bash, C, C#, C++, Dart, Elixir, Erlang, Go, Java, JavaScript, Kotlin, MS SQL Server, MySQL, Oracle SQL, PHP, PostgreSQL, Python, Python3, Racket, Ruby, Rust, Scala, Swift, TypeScript, pythondata |
-| Last Sync | 16 Sep 2026 |
+| Last Sync | 17 Sep 2026 |
 
 ---
 
@@ -41,10 +41,14 @@
 
 ---
 
-## Array (20)
+## Array (24)
 
 | # | Problem | Difficulty | Solution |
 |---|---------|------------|----------|
+| 0739 | Daily Temperatures | 🟡 Medium | [View](./0739-daily-temperatures/) |
+| 0740 | Delete and Earn | 🟡 Medium | [View](./0740-delete-and-earn/) |
+| 4258 | Construct Uniform Parity Array II | 🟡 Medium | [View](./4258-construct-uniform-parity-array-ii/) |
+| 4256 | Construct Uniform Parity Array I | 🟢 Easy | [View](./4256-construct-uniform-parity-array-i/) |
 | 0035 | Search Insert Position | 🟢 Easy | [View](./0035-search-insert-position/) |
 | 1635 | Number of Good Pairs | 🟢 Easy | [View](./1635-number-of-good-pairs/) |
 | 3236 | Smallest Missing Integer Greater Than Sequential Prefix Sum | 🟢 Easy | [View](./3236-smallest-missing-integer-greater-than-sequential-prefix-sum/) |
@@ -85,10 +89,11 @@
 
 ---
 
-## Binary Search (4)
+## Binary Search (5)
 
 | # | Problem | Difficulty | Solution |
 |---|---------|------------|----------|
+| 0069 | Sqrt(x) | 🟢 Easy | [View](./0069-sqrtx/) |
 | 0035 | Search Insert Position | 🟢 Easy | [View](./0035-search-insert-position/) |
 | 0400 | Nth Digit | 🟡 Medium | [View](./0400-nth-digit/) |
 | 0004 | Median of Two Sorted Arrays | 🔴 Hard | [View](./0004-median-of-two-sorted-arrays/) |
@@ -203,10 +208,11 @@
 
 ---
 
-## Dynamic Programming (10)
+## Dynamic Programming (11)
 
 | # | Problem | Difficulty | Solution |
 |---|---------|------------|----------|
+| 0740 | Delete and Earn | 🟡 Medium | [View](./0740-delete-and-earn/) |
 | 0416 | Partition Equal Subset Sum | 🟡 Medium | [View](./0416-partition-equal-subset-sum/) |
 | 0005 | Longest Palindromic Substring | 🟡 Medium | [View](./0005-longest-palindromic-substring/) |
 | 0022 | Generate Parentheses | 🟡 Medium | [View](./0022-generate-parentheses/) |
@@ -281,10 +287,11 @@
 
 ---
 
-## Hash Table (8)
+## Hash Table (9)
 
 | # | Problem | Difficulty | Solution |
 |---|---------|------------|----------|
+| 0740 | Delete and Earn | 🟡 Medium | [View](./0740-delete-and-earn/) |
 | 3349 | Maximum Length Substring With Two Occurrences | 🟢 Easy | [View](./3349-maximum-length-substring-with-two-occurrences/) |
 | 1635 | Number of Good Pairs | 🟢 Easy | [View](./1635-number-of-good-pairs/) |
 | 3236 | Smallest Missing Integer Greater Than Sequential Prefix Sum | 🟢 Easy | [View](./3236-smallest-missing-integer-greater-than-sequential-prefix-sum/) |
@@ -369,12 +376,15 @@
 
 ---
 
-## Math (32)
+## Math (35)
 
 | # | Problem | Difficulty | Solution |
 |---|---------|------------|----------|
-| 4245 | Count Commas in Range | 🟢 Easy | [View](./4245-count-commas-in-range/) |
+| 4258 | Construct Uniform Parity Array II | 🟡 Medium | [View](./4258-construct-uniform-parity-array-ii/) |
+| 4256 | Construct Uniform Parity Array I | 🟢 Easy | [View](./4256-construct-uniform-parity-array-i/) |
+| 0069 | Sqrt(x) | 🟢 Easy | [View](./0069-sqrtx/) |
 | 0866 | Rectangle Overlap | 🟢 Easy | [View](./0866-rectangle-overlap/) |
+| 4245 | Count Commas in Range | 🟢 Easy | [View](./4245-count-commas-in-range/) |
 | 1635 | Number of Good Pairs | 🟢 Easy | [View](./1635-number-of-good-pairs/) |
 | 0400 | Nth Digit | 🟡 Medium | [View](./0400-nth-digit/) |
 | 3275 | Minimum Number of Pushes to Type Word I | 🟢 Easy | [View](./3275-minimum-number-of-pushes-to-type-word-i/) |
@@ -439,6 +449,22 @@
 | 0909 | Stone Game | 🟡 Medium | [View](./0909-stone-game/) |
 | 1617 | Stone Game IV | 🔴 Hard | [View](./1617-stone-game-iv/) |
 | 0292 | Nim Game | 🟢 Easy | [View](./0292-nim-game/) |
+
+---
+
+## Monotonic Stack (1)
+
+| # | Problem | Difficulty | Solution |
+|---|---------|------------|----------|
+| 0739 | Daily Temperatures | 🟡 Medium | [View](./0739-daily-temperatures/) |
+
+---
+
+## Newton's Method (1)
+
+| # | Problem | Difficulty | Solution |
+|---|---------|------------|----------|
+| 0069 | Sqrt(x) | 🟢 Easy | [View](./0069-sqrtx/) |
 
 ---
 
@@ -568,10 +594,11 @@
 
 ---
 
-## Stack (4)
+## Stack (5)
 
 | # | Problem | Difficulty | Solution |
 |---|---------|------------|----------|
+| 0739 | Daily Temperatures | 🟡 Medium | [View](./0739-daily-temperatures/) |
 | 0155 | Min Stack | 🟡 Medium | [View](./0155-min-stack/) |
 | 0020 | Valid Parentheses | 🟢 Easy | [View](./0020-valid-parentheses/) |
 | 0227 | Basic Calculator II | 🟡 Medium | [View](./0227-basic-calculator-ii/) |
@@ -579,10 +606,11 @@
 
 ---
 
-## String (13)
+## String (14)
 
 | # | Problem | Difficulty | Solution |
 |---|---------|------------|----------|
+| 0008 | String to Integer (atoi) | 🟡 Medium | [View](./0008-string-to-integer-atoi/) |
 | 3349 | Maximum Length Substring With Two Occurrences | 🟢 Easy | [View](./3349-maximum-length-substring-with-two-occurrences/) |
 | 3275 | Minimum Number of Pushes to Type Word I | 🟢 Easy | [View](./3275-minimum-number-of-pushes-to-type-word-i/) |
 | 0005 | Longest Palindromic Substring | 🟡 Medium | [View](./0005-longest-palindromic-substring/) |
@@ -652,28 +680,16 @@
 
 | Date | Problem | Difficulty | Language |
 |------|----------|------------|----------|
+| 16 Sep 2026 | Daily Temperatures | 🟡 Medium | C++ |
+| 16 Sep 2026 | Delete and Earn | 🟡 Medium | C++ |
+| 16 Sep 2026 | String to Integer (atoi) | 🟡 Medium | C++ |
+| 16 Sep 2026 | Construct Uniform Parity Array II | 🟡 Medium | C++ |
+| 16 Sep 2026 | Construct Uniform Parity Array I | 🟢 Easy | C |
+| 16 Sep 2026 | Sqrt(x) | 🟢 Easy | C++ |
 | 16 Sep 2026 | Rectangle Overlap | 🟢 Easy | Elixir |
 | 16 Sep 2026 | Count Commas in Range | 🟢 Easy | C# |
 | 16 Sep 2026 | Search Insert Position | 🟢 Easy | Java |
 | 15 Aug 2026 | Maximum Length Substring With Two Occurrences | 🟢 Easy | C++ |
-| 11 Aug 2026 | Number of Good Pairs | 🟢 Easy | C++ |
-| 11 Aug 2026 | Nth Digit | 🟡 Medium | C++ |
-| 11 Aug 2026 | Smallest Missing Integer Greater Than Sequential Prefix Sum | 🟢 Easy | C++ |
-| 09 Aug 2026 | Min Stack | 🟡 Medium | C++ |
-| 07 Aug 2026 | Partition Equal Subset Sum | 🟡 Medium | C++ |
-| 31 Jul 2026 | Minimum Number of Pushes to Type Word I | 🟢 Easy | C++ |
-
----
-
-# ⚡ Features
-
-- Historical Import
-- Live Sync
-- Duplicate Resolution
-- Multi-language Support
-- Automatic README Generation
-- Automatic Statistics
-- Topic Classification
 
 ---
 

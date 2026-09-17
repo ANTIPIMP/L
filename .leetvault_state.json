@@ -1,8 +1,8 @@
 {
   "stats": {
-    "total": 62,
-    "easy": 25,
-    "medium": 26,
+    "total": 68,
+    "easy": 27,
+    "medium": 30,
     "hard": 11,
     "languages": [
       "Bash",
@@ -31,13 +31,382 @@
       "TypeScript",
       "pythondata"
     ],
-    "lastSync": "16 Sep 2026"
+    "lastSync": "17 Sep 2026"
   },
   "problems": [
     {
+      "title": "Daily Temperatures",
+      "slug": "daily-temperatures",
+      "qid": "739",
+      "files": [
+        {
+          "filename": "solution.cpp",
+          "language": "cpp",
+          "code": "class Solution {\npublic:\n    std::vector<int> dailyTemperatures(std::vector<int>& temps) {\n        std::vector<int> results(temps.size());\n        std::stack<int> stack;\n\n        for (int i = 0; i < temps.size(); i++) {\n            while (!stack.empty() && temps[stack.top()] < temps[i]) {\n                results[stack.top()] = i - stack.top();\n                stack.pop();\n            }\n            stack.push(i);\n        }\n\n        return results;\n    }\n};",
+          "runtime": "20 ms",
+          "memory": "107.3 MB",
+          "status": "Accepted",
+          "timestamp": 1789560145,
+          "note": "",
+          "id": 2143615959
+        }
+      ],
+      "questionId": "739",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        {
+          "name": "Array",
+          "slug": "array"
+        },
+        {
+          "name": "Stack",
+          "slug": "stack"
+        },
+        {
+          "name": "Monotonic Stack",
+          "slug": "monotonic-stack"
+        }
+      ],
+      "likes": 14986,
+      "dislikes": 380,
+      "acceptanceRate": "69.1%",
+      "content": "<p>Given an array of integers <code>temperatures</code> represents the daily temperatures, return <em>an array</em> <code>answer</code> <em>such that</em> <code>answer[i]</code> <em>is the number of days you have to wait after the</em> <code>i<sup>th</sup></code> <em>day to get a warmer temperature</em>. If there is no future day for which this is possible, keep <code>answer[i] == 0</code> instead.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n<pre><strong>Input:</strong> temperatures = [73,74,75,71,69,72,76,73]\n<strong>Output:</strong> [1,1,4,2,1,1,0,0]\n</pre><p><strong class=\"example\">Example 2:</strong></p>\n<pre><strong>Input:</strong> temperatures = [30,40,50,60]\n<strong>Output:</strong> [1,1,1,0]\n</pre><p><strong class=\"example\">Example 3:</strong></p>\n<pre><strong>Input:</strong> temperatures = [30,60,90]\n<strong>Output:</strong> [1,1,0]\n</pre>\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;=&nbsp;temperatures.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>30 &lt;=&nbsp;temperatures[i] &lt;= 100</code></li>\n</ul>\n",
+      "hints": [
+        "If the temperature is say, 70 today, then in the future a warmer temperature must be either 71, 72, 73, ..., 99, or 100.  We could remember when all of them occur next."
+      ],
+      "similarQuestions": [
+        {
+          "difficulty": "Easy",
+          "title": "Next Greater Element I",
+          "titleSlug": "next-greater-element-i"
+        },
+        {
+          "difficulty": "Medium",
+          "title": "Online Stock Span",
+          "titleSlug": "online-stock-span"
+        }
+      ],
+      "url": "https://leetcode.com/problems/daily-temperatures/"
+    },
+    {
+      "title": "Delete and Earn",
+      "slug": "delete-and-earn",
+      "qid": "740",
+      "files": [
+        {
+          "filename": "solution.cpp",
+          "language": "cpp",
+          "code": "class Solution {\npublic:\n    int deleteAndEarn(vector<int>& nums) {\n        int n = nums.size();\n        sort(nums.begin(), nums.end());\n        int maxi = nums[n-1];\n\n        vector<int> points(maxi+1, 0);\n\n        for(int num : nums) {\n            points[num] += num;\n        }\n\n        vector<int> dp(maxi+1, 0);\n        dp[0] = points[0];\n\n        for(int i = 1; i <= maxi; i++) {\n            int pick = points[i];\n\n            if(i > 1) {\n                pick += dp[i-2];\n            }\n\n            int nonPick = dp[i-1];\n\n            dp[i] = max(pick, nonPick);\n        }\n        return dp[maxi];\n    }\n};",
+          "runtime": "3 ms",
+          "memory": "15.7 MB",
+          "status": "Accepted",
+          "timestamp": 1789559094,
+          "note": "",
+          "id": 2143603911
+        }
+      ],
+      "questionId": "740",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        {
+          "name": "Array",
+          "slug": "array"
+        },
+        {
+          "name": "Hash Table",
+          "slug": "hash-table"
+        },
+        {
+          "name": "Dynamic Programming",
+          "slug": "dynamic-programming"
+        }
+      ],
+      "likes": 8075,
+      "dislikes": 407,
+      "acceptanceRate": "57.5%",
+      "content": "<p>You are given an integer array <code>nums</code>. You want to maximize the number of points you get by performing the following operation any number of times:</p>\n\n<ul>\n\t<li>Pick any <code>nums[i]</code> and delete it to earn <code>nums[i]</code> points. Afterwards, you must delete <b>every</b> element equal to <code>nums[i] - 1</code> and <strong>every</strong> element equal to <code>nums[i] + 1</code>.</li>\n</ul>\n\n<p>Return <em>the <strong>maximum number of points</strong> you can earn by applying the above operation some number of times</em>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [3,4,2]\n<strong>Output:</strong> 6\n<strong>Explanation:</strong> You can perform the following operations:\n- Delete 4 to earn 4 points. Consequently, 3 is also deleted. nums = [2].\n- Delete 2 to earn 2 points. nums = [].\nYou earn a total of 6 points.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [2,2,3,3,3,4]\n<strong>Output:</strong> 9\n<strong>Explanation:</strong> You can perform the following operations:\n- Delete a 3 to earn 3 points. All 2&#39;s and 4&#39;s are also deleted. nums = [3,3].\n- Delete a 3 again to earn 3 points. nums = [3].\n- Delete a 3 once more to earn 3 points. nums = [].\nYou earn a total of 9 points.</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= nums.length &lt;= 2 * 10<sup>4</sup></code></li>\n\t<li><code>1 &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>\n</ul>\n",
+      "hints": [
+        "If you take a number, you might as well take them all.  Keep track of what the value is of the subset of the input with maximum M when you either take or don't take M."
+      ],
+      "similarQuestions": [
+        {
+          "difficulty": "Medium",
+          "title": "House Robber",
+          "titleSlug": "house-robber"
+        }
+      ],
+      "url": "https://leetcode.com/problems/delete-and-earn/"
+    },
+    {
+      "title": "String to Integer (atoi)",
+      "slug": "string-to-integer-atoi",
+      "qid": "8",
+      "files": [
+        {
+          "filename": "solution.cpp",
+          "language": "cpp",
+          "code": "#include <iostream>\n#include <string>\nusing namespace std;\n\nclass Solution {\npublic:\n    int myAtoi(string s) {\n        int i = 0, sign = 1;\n        long res = 0; // Using long to handle overflow cases\n\n        // Trim leading spaces\n        while (i < s.size() && s[i] == ' ') i++;\n        if (i == s.size()) return 0;\n\n        // Check for sign\n        if (s[i] == '-') { sign = -1; i++; }\n        else if (s[i] == '+') i++;\n\n        // Process numerical characters\n        while (i < s.size() && isdigit(s[i])) {\n            res = res * 10 + (s[i] - '0');\n\n            // Handle overflow\n            if (sign * res > INT_MAX) return INT_MAX;\n            if (sign * res < INT_MIN) return INT_MIN;\n\n            i++;\n        }\n\n        return (int)(sign * res);\n    }\n};",
+          "runtime": "0 ms",
+          "memory": "9.2 MB",
+          "status": "Accepted",
+          "timestamp": 1789558811,
+          "note": "",
+          "id": 2143600906
+        }
+      ],
+      "questionId": "8",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        {
+          "name": "String",
+          "slug": "string"
+        }
+      ],
+      "likes": 6439,
+      "dislikes": 15818,
+      "acceptanceRate": "21.7%",
+      "content": "<p>Implement the <code>myAtoi(string s)</code> function, which converts a string to a 32-bit signed integer.</p>\n\n<p>The algorithm for <code>myAtoi(string s)</code> is as follows:</p>\n\n<ol>\n\t<li><strong>Whitespace</strong>: Ignore any leading whitespace (<code>&quot; &quot;</code>).</li>\n\t<li><strong>Signedness</strong>: Determine the sign by checking if the next character is <code>&#39;-&#39;</code> or <code>&#39;+&#39;</code>, assuming positivity if neither present.</li>\n\t<li><strong>Conversion</strong>: Read the integer by skipping leading zeros&nbsp;until a non-digit character is encountered or the end of the string is reached. If no digits were read, then the result is 0.</li>\n\t<li><strong>Rounding</strong>: If the integer is out of the 32-bit signed integer range <code>[-2<sup>31</sup>, 2<sup>31</sup> - 1]</code>, then round the integer to remain in the range. Specifically, integers less than <code>-2<sup>31</sup></code> should be rounded to <code>-2<sup>31</sup></code>, and integers greater than <code>2<sup>31</sup> - 1</code> should be rounded to <code>2<sup>31</sup> - 1</code>.</li>\n</ol>\n\n<p>Return the integer as the final result.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">s = &quot;42&quot;</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">42</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<pre>\nThe underlined characters are what is read in and the caret is the current reader position.\nStep 1: &quot;42&quot; (no characters read because there is no leading whitespace)\n         ^\nStep 2: &quot;42&quot; (no characters read because there is neither a &#39;-&#39; nor &#39;+&#39;)\n         ^\nStep 3: &quot;<u>42</u>&quot; (&quot;42&quot; is read in)\n           ^\n</pre>\n</div>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">s = &quot; -042&quot;</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">-42</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<pre>\nStep 1: &quot;<u>   </u>-042&quot; (leading whitespace is read and ignored)\n            ^\nStep 2: &quot;   <u>-</u>042&quot; (&#39;-&#39; is read, so the result should be negative)\n             ^\nStep 3: &quot;   -<u>042</u>&quot; (&quot;042&quot; is read in, leading zeros ignored in the result)\n               ^\n</pre>\n</div>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">s = &quot;1337c0d3&quot;</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">1337</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<pre>\nStep 1: &quot;1337c0d3&quot; (no characters read because there is no leading whitespace)\n         ^\nStep 2: &quot;1337c0d3&quot; (no characters read because there is neither a &#39;-&#39; nor &#39;+&#39;)\n         ^\nStep 3: &quot;<u>1337</u>c0d3&quot; (&quot;1337&quot; is read in; reading stops because the next character is a non-digit)\n             ^\n</pre>\n</div>\n\n<p><strong class=\"example\">Example 4:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">s = &quot;0-1&quot;</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">0</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<pre>\nStep 1: &quot;0-1&quot; (no characters read because there is no leading whitespace)\n         ^\nStep 2: &quot;0-1&quot; (no characters read because there is neither a &#39;-&#39; nor &#39;+&#39;)\n         ^\nStep 3: &quot;<u>0</u>-1&quot; (&quot;0&quot; is read in; reading stops because the next character is a non-digit)\n          ^\n</pre>\n</div>\n\n<p><strong class=\"example\">Example 5:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">s = &quot;words and 987&quot;</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">0</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<p>Reading stops at the first non-digit character &#39;w&#39;.</p>\n</div>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>0 &lt;= s.length &lt;= 200</code></li>\n\t<li><code>s</code> consists of English letters (lower-case and upper-case), digits (<code>0-9</code>), <code>&#39; &#39;</code>, <code>&#39;+&#39;</code>, <code>&#39;-&#39;</code>, and <code>&#39;.&#39;</code>.</li>\n</ul>\n",
+      "hints": [],
+      "similarQuestions": [
+        {
+          "difficulty": "Medium",
+          "title": "Reverse Integer",
+          "titleSlug": "reverse-integer"
+        },
+        {
+          "difficulty": "Hard",
+          "title": "Valid Number",
+          "titleSlug": "valid-number"
+        },
+        {
+          "difficulty": "Easy",
+          "title": "Check if Numbers Are Ascending in a Sentence",
+          "titleSlug": "check-if-numbers-are-ascending-in-a-sentence"
+        }
+      ],
+      "url": "https://leetcode.com/problems/string-to-integer-atoi/"
+    },
+    {
+      "title": "Construct Uniform Parity Array II",
+      "slug": "construct-uniform-parity-array-ii",
+      "qid": "4258",
+      "files": [
+        {
+          "filename": "solution.cpp",
+          "language": "cpp",
+          "code": "class Solution {\npublic:\n    bool uniformArray(vector<int>& nums1) {\n        int mn = nums1[0];\n        bool hasOdd = false;\n        for (int v : nums1) {\n            if (v < mn) {\n                mn = v;\n            }\n            if (v & 1) {\n                hasOdd = true;\n            }\n        }\n        if (mn & 1) {\n            return true;\n        }\n        return !hasOdd;\n    }\n};",
+          "runtime": "4 ms",
+          "memory": "165.9 MB",
+          "status": "Accepted",
+          "timestamp": 1789557382,
+          "note": "",
+          "id": 2143584801
+        },
+        {
+          "filename": "solution.c",
+          "language": "c",
+          "code": "class Solution {\npublic:\n    bool uniformArray(vector<int>& nums1) {\n        int mn = nums1[0];\n        bool hasOdd = false;\n        for (int v : nums1) {\n            if (v < mn) {\n                mn = v;\n            }\n            if (v & 1) {\n                hasOdd = true;\n            }\n        }\n        if (mn & 1) {\n            return true;\n        }\n        return !hasOdd;\n    }\n};",
+          "runtime": "N/A",
+          "memory": "N/A",
+          "status": "Compile Error",
+          "timestamp": 1789557374,
+          "note": "",
+          "id": 2143584707
+        }
+      ],
+      "questionId": "4258",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        {
+          "name": "Array",
+          "slug": "array"
+        },
+        {
+          "name": "Math",
+          "slug": "math"
+        }
+      ],
+      "likes": 89,
+      "dislikes": 8,
+      "acceptanceRate": "51.6%",
+      "content": "<p>You are given an array <code>nums1</code> of <code>n</code> <strong>distinct</strong> integers.</p>\n\n<p>You want to construct another array <code>nums2</code> of length <code>n</code> such that the elements in <code>nums2</code> are either <strong>all odd or all even</strong>.</p>\n\n<p>For each index <code>i</code>, you must choose <strong>exactly one</strong> of the following (in any order):</p>\n\n<ul>\n\t<li><code>nums2[i] = nums1[i]</code>​​​​​​​</li>\n\t<li><code>nums2[i] = nums1[i] - nums1[j]</code>, for an index <code>j != i</code>, such that <code>nums1[i] - nums1[j] &gt;= 1</code></li>\n</ul>\n\n<p>Return <code>true</code> if it is possible to construct such an array, otherwise return <code>false</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">nums1 = [1,4,7]</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">true</span></p>\n\n<p><strong>Explanation:</strong>​​​​​​​​​​​​​​</p>\n\n<ul>\n\t<li>Set <code>nums2[0] = nums1[0] = 1</code>.</li>\n\t<li>Set <code>nums2[1] = nums1[1] - nums1[0] = 4 - 1 = 3</code>.</li>\n\t<li>Set <code>nums2[2] = nums1[2] = 7</code>.</li>\n\t<li><code>nums2 = [1, 3, 7]</code>, and all elements are odd. Thus, the answer is <code>true</code>.</li>\n</ul>\n</div>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">nums1 = [2,3]</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">false</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<p>It is not possible to construct <code>nums2</code> such that all elements have the same parity. Thus, the answer is <code>false</code>.</p>\n</div>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">nums1 = [4,6]</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">true</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<ul>\n\t<li>Set <code>nums2[0] = nums1[0] = 4</code>.</li>\n\t<li>Set <code>nums2[1] = nums1[1] = 6</code>.</li>\n\t<li><code>nums2 = [4, 6]</code>, and all elements are even. Thus, the answer is <code>true</code>.</li>\n</ul>\n</div>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= n == nums1.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>1 &lt;= nums1[i] &lt;= 10<sup>9</sup></code></li>\n\t<li><code>nums1</code> consists of distinct integers.</li>\n</ul>\n",
+      "hints": [
+        "Try fixing the parity to either all even or all odd.",
+        "Use the smallest odd/even element if a subtraction is needed to match the chosen parity."
+      ],
+      "similarQuestions": [],
+      "url": "https://leetcode.com/problems/construct-uniform-parity-array-ii/"
+    },
+    {
+      "title": "Construct Uniform Parity Array I",
+      "slug": "construct-uniform-parity-array-i",
+      "qid": "4256",
+      "files": [
+        {
+          "filename": "solution.c",
+          "language": "c",
+          "code": "bool uniformArray(int* nums1, int nums1Size) {\n    return true;\n}",
+          "runtime": "2 ms",
+          "memory": "9.5 MB",
+          "status": "Accepted",
+          "timestamp": 1789557101,
+          "note": "",
+          "id": 2143581642
+        },
+        {
+          "filename": "solution.cpp",
+          "language": "cpp",
+          "code": "class Solution {\npublic:\n    bool uniformArray(vector<int>& nums1) {\n        return true;\n    }\n};",
+          "runtime": "0 ms",
+          "memory": "30.2 MB",
+          "status": "Accepted",
+          "timestamp": 1789556961,
+          "note": "",
+          "id": 2143580090
+        }
+      ],
+      "questionId": "4256",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        {
+          "name": "Array",
+          "slug": "array"
+        },
+        {
+          "name": "Math",
+          "slug": "math"
+        }
+      ],
+      "likes": 316,
+      "dislikes": 65,
+      "acceptanceRate": "85.5%",
+      "content": "<p>You are given an array <code>nums1</code> of <code>n</code> <strong>distinct</strong> integers.</p>\n\n<p>You want to construct another array <code>nums2</code> of length <code>n</code> such that the elements in <code>nums2</code> are either <strong>all odd or all even</strong>.</p>\n\n<p>For each index <code>i</code>, you must choose <strong>exactly one</strong> of the following (in any order):</p>\n\n<ul>\n\t<li><code>nums2[i] = nums1[i]</code></li>\n\t<li><code>nums2[i] = nums1[i] - nums1[j]</code>, for an index <code>j != i</code></li>\n</ul>\n\n<p>Return <code>true</code> if it is possible to construct such an array, otherwise, return <code>false</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">nums1 = [2,3]</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">true</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<ul>\n\t<li>Choose <code>nums2[0] = nums1[0] - nums1[1] = 2 - 3 = -1</code>.</li>\n\t<li>Choose <code>nums2[1] = nums1[1] = 3</code>.</li>\n\t<li><code>nums2 = [-1, 3]</code>, and both elements are odd. Thus, the answer is <code>true</code>​​​​​​​.</li>\n</ul>\n</div>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">nums1 = [4,6]</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">true</span></p>\n\n<p><strong>Explanation:</strong>​​​​​​​</p>\n\n<ul>\n\t<li>Choose <code>nums2[0] = nums1[0] = 4</code>.</li>\n\t<li>Choose <code>nums2[1] = nums1[1] = 6</code>.</li>\n\t<li><code>nums2 = [4, 6]</code>, and all elements are even. Thus, the answer is <code>true</code>.</li>\n</ul>\n</div>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= n == nums1.length &lt;= 100</code></li>\n\t<li><code>1 &lt;= nums1[i] &lt;= 100</code></li>\n\t<li><code>nums1</code> consists of distinct integers.</li>\n</ul>\n",
+      "hints": [
+        "There is only one possible answer."
+      ],
+      "similarQuestions": [],
+      "url": "https://leetcode.com/problems/construct-uniform-parity-array-i/"
+    },
+    {
+      "title": "Sqrt(x)",
+      "slug": "sqrtx",
+      "qid": "69",
+      "files": [
+        {
+          "filename": "solution.cpp",
+          "language": "cpp",
+          "code": "class Solution {\npublic:\n    int mySqrt(int x) {\n        return sqrt(x);\n    }\n};",
+          "runtime": "N/A",
+          "memory": "N/A",
+          "status": "Restrictions Failed",
+          "timestamp": 1789556835,
+          "note": "",
+          "id": 2143578716
+        }
+      ],
+      "questionId": "69",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        {
+          "name": "Math",
+          "slug": "math"
+        },
+        {
+          "name": "Binary Search",
+          "slug": "binary-search"
+        },
+        {
+          "name": "Newton's Method",
+          "slug": "newtons-method"
+        }
+      ],
+      "likes": 9930,
+      "dislikes": 4654,
+      "acceptanceRate": "42.3%",
+      "content": "<p>Given a non-negative integer <code>x</code>, return <em>the square root of </em><code>x</code><em> rounded down to the nearest integer</em>. The returned integer should be <strong>non-negative</strong> as well.</p>\n\n<p>You <strong>must not use</strong> any built-in exponent function or operator.</p>\n\n<ul>\n\t<li>For example, do not use <code>pow(x, 0.5)</code> in c++ or <code>x ** 0.5</code> in python.</li>\n</ul>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> x = 4\n<strong>Output:</strong> 2\n<strong>Explanation:</strong> The square root of 4 is 2, so we return 2.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> x = 8\n<strong>Output:</strong> 2\n<strong>Explanation:</strong> The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>0 &lt;= x &lt;= 2<sup>31</sup> - 1</code></li>\n</ul>\n",
+      "hints": [
+        "Try exploring all integers. (Credits: @annujoshi)",
+        "Use the sorted property of integers to reduced the search space. (Credits: @annujoshi)"
+      ],
+      "similarQuestions": [
+        {
+          "difficulty": "Medium",
+          "title": "Pow(x, n)",
+          "titleSlug": "powx-n"
+        },
+        {
+          "difficulty": "Easy",
+          "title": "Valid Perfect Square",
+          "titleSlug": "valid-perfect-square"
+        }
+      ],
+      "url": "https://leetcode.com/problems/sqrtx/"
+    },
+    {
+      "title": "Rectangle Overlap",
+      "slug": "rectangle-overlap",
+      "qid": "866",
+      "files": [
+        {
+          "filename": "solution.ex",
+          "language": "elixir",
+          "code": "defmodule Solution do\n  @spec is_rectangle_overlap(rec1 :: [integer], rec2 :: [integer]) :: boolean\n  def is_rectangle_overlap([x1, y1, x2, y2], [x3, y3, x4, y4]) do\n    x4 > x1 and y4 > y1 and x3 < x2 and y3 < y2\n  end\nend",
+          "runtime": "0 ms",
+          "memory": "56.4 MB",
+          "status": "Accepted",
+          "timestamp": 1789556560,
+          "note": "",
+          "id": 2143575403
+        },
+        {
+          "filename": "solution.cpp",
+          "language": "cpp",
+          "code": "class Solution {\npublic:\n    bool isRectangleOverlap(vector<int>& rec1, vector<int>& rec2) {\n        return (rec1[2] > rec2[0] && rec1[3] > rec2[1] &&\n                rec1[0] < rec2[2] && rec1[1] < rec2[3]);\n    }\n};",
+          "runtime": "0 ms",
+          "memory": "9.8 MB",
+          "status": "Accepted",
+          "timestamp": 1789550421,
+          "note": "",
+          "id": 2143495675
+        }
+      ],
+      "questionId": "866",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        {
+          "name": "Math",
+          "slug": "math"
+        },
+        {
+          "name": "Geometry",
+          "slug": "geometry"
+        }
+      ],
+      "likes": 2105,
+      "dislikes": 483,
+      "acceptanceRate": "47.0%",
+      "content": "<p>An axis-aligned rectangle is represented as a list <code>[x1, y1, x2, y2]</code>, where <code>(x1, y1)</code> is the coordinate of its bottom-left corner, and <code>(x2, y2)</code> is the coordinate of its top-right corner. Its top and bottom edges are parallel to the X-axis, and its left and right edges are parallel to the Y-axis.</p>\n\n<p>Two rectangles overlap if the area of their intersection is <strong>positive</strong>. To be clear, two rectangles that only touch at the corner or edges do not overlap.</p>\n\n<p>Given two axis-aligned rectangles <code>rec1</code> and <code>rec2</code>, return <code>true</code><em> if they overlap, otherwise return </em><code>false</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n<pre><strong>Input:</strong> rec1 = [0,0,2,2], rec2 = [1,1,3,3]\n<strong>Output:</strong> true\n</pre><p><strong class=\"example\">Example 2:</strong></p>\n<pre><strong>Input:</strong> rec1 = [0,0,1,1], rec2 = [1,0,2,1]\n<strong>Output:</strong> false\n</pre><p><strong class=\"example\">Example 3:</strong></p>\n<pre><strong>Input:</strong> rec1 = [0,0,1,1], rec2 = [2,2,3,3]\n<strong>Output:</strong> false\n</pre>\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>rec1.length == 4</code></li>\n\t<li><code>rec2.length == 4</code></li>\n\t<li><code>-10<sup>9</sup> &lt;= rec1[i], rec2[i] &lt;= 10<sup>9</sup></code></li>\n\t<li><code>rec1</code> and <code>rec2</code> represent a valid rectangle with a non-zero area.</li>\n</ul>\n",
+      "hints": [],
+      "similarQuestions": [
+        {
+          "difficulty": "Medium",
+          "title": "Rectangle Area",
+          "titleSlug": "rectangle-area"
+        }
+      ],
+      "url": "https://leetcode.com/problems/rectangle-overlap/"
+    },
+    {
       "title": "Count Commas in Range",
       "slug": "count-commas-in-range",
-      "qid": 4245,
+      "qid": "4245",
       "files": [
         {
           "filename": "Solution.cs",
@@ -84,7 +453,7 @@
     {
       "title": "Search Insert Position",
       "slug": "search-insert-position",
-      "qid": 35,
+      "qid": "35",
       "files": [
         {
           "filename": "Solution.java",
@@ -129,77 +498,22 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "First Bad Version",
-          "titleSlug": "first-bad-version",
-          "difficulty": "Easy"
+          "titleSlug": "first-bad-version"
         },
         {
+          "difficulty": "Easy",
           "title": "Minimum Operations to Exceed Threshold Value I",
-          "titleSlug": "minimum-operations-to-exceed-threshold-value-i",
-          "difficulty": "Easy"
+          "titleSlug": "minimum-operations-to-exceed-threshold-value-i"
         }
       ],
       "url": "https://leetcode.com/problems/search-insert-position/"
     },
     {
-      "title": "Rectangle Overlap",
-      "slug": "rectangle-overlap",
-      "qid": "866",
-      "files": [
-        {
-          "filename": "solution.cpp",
-          "language": "cpp",
-          "code": "class Solution {\npublic:\n    bool isRectangleOverlap(vector<int>& rec1, vector<int>& rec2) {\n        return (rec1[2] > rec2[0] && rec1[3] > rec2[1] &&\n                rec1[0] < rec2[2] && rec1[1] < rec2[3]);\n    }\n};",
-          "runtime": "0 ms",
-          "memory": "9.8 MB",
-          "status": "Accepted",
-          "timestamp": 1789550421,
-          "note": "",
-          "id": 2143495675
-        },
-        {
-          "filename": "solution.ex",
-          "language": "elixir",
-          "code": "defmodule Solution do\n  @spec is_rectangle_overlap(rec1 :: [integer], rec2 :: [integer]) :: boolean\n  def is_rectangle_overlap([x1, y1, x2, y2], [x3, y3, x4, y4]) do\n    x4 > x1 and y4 > y1 and x3 < x2 and y3 < y2\n  end\nend",
-          "runtime": "0 ms",
-          "memory": "56.4 MB",
-          "status": "Accepted",
-          "timestamp": 1789556560,
-          "note": "",
-          "id": 2143575403
-        }
-      ],
-      "questionId": "866",
-      "difficulty": "Easy",
-      "paidOnly": false,
-      "tags": [
-        {
-          "name": "Math",
-          "slug": "math"
-        },
-        {
-          "name": "Geometry",
-          "slug": "geometry"
-        }
-      ],
-      "likes": 2105,
-      "dislikes": 483,
-      "acceptanceRate": "47.0%",
-      "content": "<p>An axis-aligned rectangle is represented as a list <code>[x1, y1, x2, y2]</code>, where <code>(x1, y1)</code> is the coordinate of its bottom-left corner, and <code>(x2, y2)</code> is the coordinate of its top-right corner. Its top and bottom edges are parallel to the X-axis, and its left and right edges are parallel to the Y-axis.</p>\n\n<p>Two rectangles overlap if the area of their intersection is <strong>positive</strong>. To be clear, two rectangles that only touch at the corner or edges do not overlap.</p>\n\n<p>Given two axis-aligned rectangles <code>rec1</code> and <code>rec2</code>, return <code>true</code><em> if they overlap, otherwise return </em><code>false</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n<pre><strong>Input:</strong> rec1 = [0,0,2,2], rec2 = [1,1,3,3]\n<strong>Output:</strong> true\n</pre><p><strong class=\"example\">Example 2:</strong></p>\n<pre><strong>Input:</strong> rec1 = [0,0,1,1], rec2 = [1,0,2,1]\n<strong>Output:</strong> false\n</pre><p><strong class=\"example\">Example 3:</strong></p>\n<pre><strong>Input:</strong> rec1 = [0,0,1,1], rec2 = [2,2,3,3]\n<strong>Output:</strong> false\n</pre>\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>rec1.length == 4</code></li>\n\t<li><code>rec2.length == 4</code></li>\n\t<li><code>-10<sup>9</sup> &lt;= rec1[i], rec2[i] &lt;= 10<sup>9</sup></code></li>\n\t<li><code>rec1</code> and <code>rec2</code> represent a valid rectangle with a non-zero area.</li>\n</ul>\n",
-      "hints": [],
-      "similarQuestions": [
-        {
-          "title": "Rectangle Area",
-          "titleSlug": "rectangle-area",
-          "difficulty": "Medium"
-        }
-      ],
-      "url": "https://leetcode.com/problems/rectangle-overlap/"
-    },
-    {
       "title": "Maximum Length Substring With Two Occurrences",
       "slug": "maximum-length-substring-with-two-occurrences",
-      "qid": 3349,
+      "qid": "3349",
       "files": [
         {
           "filename": "solution.cpp",
@@ -243,7 +557,7 @@
     {
       "title": "Number of Good Pairs",
       "slug": "number-of-good-pairs",
-      "qid": 1635,
+      "qid": "1635",
       "files": [
         {
           "filename": "solution.cpp",
@@ -287,14 +601,14 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Number of Pairs of Interchangeable Rectangles",
-          "titleSlug": "number-of-pairs-of-interchangeable-rectangles",
-          "difficulty": "Medium"
+          "titleSlug": "number-of-pairs-of-interchangeable-rectangles"
         },
         {
+          "difficulty": "Medium",
           "title": "Substrings That Begin and End With the Same Letter",
-          "titleSlug": "substrings-that-begin-and-end-with-the-same-letter",
-          "difficulty": "Medium"
+          "titleSlug": "substrings-that-begin-and-end-with-the-same-letter"
         }
       ],
       "url": "https://leetcode.com/problems/number-of-good-pairs/"
@@ -302,7 +616,7 @@
     {
       "title": "Nth Digit",
       "slug": "nth-digit",
-      "qid": 400,
+      "qid": "400",
       "files": [
         {
           "filename": "solution.cpp",
@@ -336,9 +650,9 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "K-th Digit in Infinite String",
-          "titleSlug": "k-th-digit-in-infinite-string",
-          "difficulty": "Medium"
+          "titleSlug": "k-th-digit-in-infinite-string"
         }
       ],
       "url": "https://leetcode.com/problems/nth-digit/"
@@ -346,7 +660,7 @@
     {
       "title": "Smallest Missing Integer Greater Than Sequential Prefix Sum",
       "slug": "smallest-missing-integer-greater-than-sequential-prefix-sum",
-      "qid": 3236,
+      "qid": "3236",
       "files": [
         {
           "filename": "solution.cpp",
@@ -386,19 +700,19 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Longest Common Prefix",
-          "titleSlug": "longest-common-prefix",
-          "difficulty": "Easy"
+          "titleSlug": "longest-common-prefix"
         },
         {
+          "difficulty": "Hard",
           "title": "First Missing Positive",
-          "titleSlug": "first-missing-positive",
-          "difficulty": "Hard"
+          "titleSlug": "first-missing-positive"
         },
         {
+          "difficulty": "Easy",
           "title": "Next Greater Element I",
-          "titleSlug": "next-greater-element-i",
-          "difficulty": "Easy"
+          "titleSlug": "next-greater-element-i"
         }
       ],
       "url": "https://leetcode.com/problems/smallest-missing-integer-greater-than-sequential-prefix-sum/"
@@ -406,7 +720,7 @@
     {
       "title": "Min Stack",
       "slug": "min-stack",
-      "qid": 155,
+      "qid": "155",
       "files": [
         {
           "filename": "solution.cpp",
@@ -442,14 +756,14 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Hard",
           "title": "Sliding Window Maximum",
-          "titleSlug": "sliding-window-maximum",
-          "difficulty": "Hard"
+          "titleSlug": "sliding-window-maximum"
         },
         {
+          "difficulty": "Hard",
           "title": "Max Stack",
-          "titleSlug": "max-stack",
-          "difficulty": "Hard"
+          "titleSlug": "max-stack"
         }
       ],
       "url": "https://leetcode.com/problems/min-stack/"
@@ -457,7 +771,7 @@
     {
       "title": "Partition Equal Subset Sum",
       "slug": "partition-equal-subset-sum",
-      "qid": 416,
+      "qid": "416",
       "files": [
         {
           "filename": "solution.cpp",
@@ -499,39 +813,39 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Partition to K Equal Sum Subsets",
-          "titleSlug": "partition-to-k-equal-sum-subsets",
-          "difficulty": "Medium"
+          "titleSlug": "partition-to-k-equal-sum-subsets"
         },
         {
+          "difficulty": "Medium",
           "title": "Minimize the Difference Between Target and Chosen Elements",
-          "titleSlug": "minimize-the-difference-between-target-and-chosen-elements",
-          "difficulty": "Medium"
+          "titleSlug": "minimize-the-difference-between-target-and-chosen-elements"
         },
         {
+          "difficulty": "Hard",
           "title": "Maximum Number of Ways to Partition an Array",
-          "titleSlug": "maximum-number-of-ways-to-partition-an-array",
-          "difficulty": "Hard"
+          "titleSlug": "maximum-number-of-ways-to-partition-an-array"
         },
         {
+          "difficulty": "Hard",
           "title": "Partition Array Into Two Arrays to Minimize Sum Difference",
-          "titleSlug": "partition-array-into-two-arrays-to-minimize-sum-difference",
-          "difficulty": "Hard"
+          "titleSlug": "partition-array-into-two-arrays-to-minimize-sum-difference"
         },
         {
+          "difficulty": "Easy",
           "title": "Find Subarrays With Equal Sum",
-          "titleSlug": "find-subarrays-with-equal-sum",
-          "difficulty": "Easy"
+          "titleSlug": "find-subarrays-with-equal-sum"
         },
         {
+          "difficulty": "Hard",
           "title": "Number of Great Partitions",
-          "titleSlug": "number-of-great-partitions",
-          "difficulty": "Hard"
+          "titleSlug": "number-of-great-partitions"
         },
         {
+          "difficulty": "Easy",
           "title": "Split With Minimum Sum",
-          "titleSlug": "split-with-minimum-sum",
-          "difficulty": "Easy"
+          "titleSlug": "split-with-minimum-sum"
         }
       ],
       "url": "https://leetcode.com/problems/partition-equal-subset-sum/"
@@ -539,7 +853,7 @@
     {
       "title": "Minimum Number of Pushes to Type Word I",
       "slug": "minimum-number-of-pushes-to-type-word-i",
-      "qid": 3275,
+      "qid": "3275",
       "files": [
         {
           "filename": "solution.cpp",
@@ -580,9 +894,9 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Letter Combinations of a Phone Number",
-          "titleSlug": "letter-combinations-of-a-phone-number",
-          "difficulty": "Medium"
+          "titleSlug": "letter-combinations-of-a-phone-number"
         }
       ],
       "url": "https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-i/"
@@ -590,7 +904,7 @@
     {
       "title": "Number of Unique XOR Triplets II",
       "slug": "number-of-unique-xor-triplets-ii",
-      "qid": 3820,
+      "qid": "3820",
       "files": [
         {
           "filename": "solution.cpp",
@@ -642,7 +956,7 @@
     {
       "title": "Count Digit Appearances",
       "slug": "count-digit-appearances",
-      "qid": 4280,
+      "qid": "4280",
       "files": [
         {
           "filename": "solution.cpp",
@@ -682,7 +996,7 @@
     {
       "title": "Distinct Prime Factors of Product of Array",
       "slug": "distinct-prime-factors-of-product-of-array",
-      "qid": 2609,
+      "qid": "2609",
       "files": [
         {
           "filename": "solution.js",
@@ -752,29 +1066,29 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "2 Keys Keyboard",
-          "titleSlug": "2-keys-keyboard",
-          "difficulty": "Medium"
+          "titleSlug": "2-keys-keyboard"
         },
         {
+          "difficulty": "Hard",
           "title": "Largest Component Size by Common Factor",
-          "titleSlug": "largest-component-size-by-common-factor",
-          "difficulty": "Hard"
+          "titleSlug": "largest-component-size-by-common-factor"
         },
         {
+          "difficulty": "Medium",
           "title": "Closest Divisors",
-          "titleSlug": "closest-divisors",
-          "difficulty": "Medium"
+          "titleSlug": "closest-divisors"
         },
         {
+          "difficulty": "Medium",
           "title": "Smallest Value After Replacing With Sum of Prime Factors",
-          "titleSlug": "smallest-value-after-replacing-with-sum-of-prime-factors",
-          "difficulty": "Medium"
+          "titleSlug": "smallest-value-after-replacing-with-sum-of-prime-factors"
         },
         {
+          "difficulty": "Medium",
           "title": "Count the Number of Square-Free Subsets",
-          "titleSlug": "count-the-number-of-square-free-subsets",
-          "difficulty": "Medium"
+          "titleSlug": "count-the-number-of-square-free-subsets"
         }
       ],
       "url": "https://leetcode.com/problems/distinct-prime-factors-of-product-of-array/"
@@ -782,7 +1096,7 @@
     {
       "title": "Account Balance After Rounded Purchase",
       "slug": "account-balance-after-rounded-purchase",
-      "qid": 2955,
+      "qid": "2955",
       "files": [
         {
           "filename": "solution.cpp",
@@ -819,7 +1133,7 @@
     {
       "title": "Count the Digits That Divide a Number",
       "slug": "count-the-digits-that-divide-a-number",
-      "qid": 2608,
+      "qid": "2608",
       "files": [
         {
           "filename": "solution.cpp",
@@ -853,14 +1167,14 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Happy Number",
-          "titleSlug": "happy-number",
-          "difficulty": "Easy"
+          "titleSlug": "happy-number"
         },
         {
+          "difficulty": "Easy",
           "title": "Self Dividing Numbers",
-          "titleSlug": "self-dividing-numbers",
-          "difficulty": "Easy"
+          "titleSlug": "self-dividing-numbers"
         }
       ],
       "url": "https://leetcode.com/problems/count-the-digits-that-divide-a-number/"
@@ -868,7 +1182,7 @@
     {
       "title": "A Number After a Double Reversal",
       "slug": "a-number-after-a-double-reversal",
-      "qid": 2238,
+      "qid": "2238",
       "files": [
         {
           "filename": "solution.cpp",
@@ -900,14 +1214,14 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Reverse Integer",
-          "titleSlug": "reverse-integer",
-          "difficulty": "Medium"
+          "titleSlug": "reverse-integer"
         },
         {
+          "difficulty": "Easy",
           "title": "Reverse Bits",
-          "titleSlug": "reverse-bits",
-          "difficulty": "Easy"
+          "titleSlug": "reverse-bits"
         }
       ],
       "url": "https://leetcode.com/problems/a-number-after-a-double-reversal/"
@@ -915,7 +1229,7 @@
     {
       "title": "Longest Palindromic Substring",
       "slug": "longest-palindromic-substring",
-      "qid": 5,
+      "qid": "5",
       "files": [
         {
           "filename": "solution.cpp",
@@ -972,34 +1286,34 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Hard",
           "title": "Shortest Palindrome",
-          "titleSlug": "shortest-palindrome",
-          "difficulty": "Hard"
+          "titleSlug": "shortest-palindrome"
         },
         {
+          "difficulty": "Easy",
           "title": "Palindrome Permutation",
-          "titleSlug": "palindrome-permutation",
-          "difficulty": "Easy"
+          "titleSlug": "palindrome-permutation"
         },
         {
+          "difficulty": "Hard",
           "title": "Palindrome Pairs",
-          "titleSlug": "palindrome-pairs",
-          "difficulty": "Hard"
+          "titleSlug": "palindrome-pairs"
         },
         {
+          "difficulty": "Medium",
           "title": "Longest Palindromic Subsequence",
-          "titleSlug": "longest-palindromic-subsequence",
-          "difficulty": "Medium"
+          "titleSlug": "longest-palindromic-subsequence"
         },
         {
+          "difficulty": "Medium",
           "title": "Palindromic Substrings",
-          "titleSlug": "palindromic-substrings",
-          "difficulty": "Medium"
+          "titleSlug": "palindromic-substrings"
         },
         {
+          "difficulty": "Hard",
           "title": "Maximum Number of Non-overlapping Palindrome Substrings",
-          "titleSlug": "maximum-number-of-non-overlapping-palindrome-substrings",
-          "difficulty": "Hard"
+          "titleSlug": "maximum-number-of-non-overlapping-palindrome-substrings"
         }
       ],
       "url": "https://leetcode.com/problems/longest-palindromic-substring/"
@@ -1007,7 +1321,7 @@
     {
       "title": "Median of Two Sorted Arrays",
       "slug": "median-of-two-sorted-arrays",
-      "qid": 4,
+      "qid": "4",
       "files": [
         {
           "filename": "solution.py",
@@ -1067,9 +1381,9 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Median of a Row Wise Sorted Matrix",
-          "titleSlug": "median-of-a-row-wise-sorted-matrix",
-          "difficulty": "Medium"
+          "titleSlug": "median-of-a-row-wise-sorted-matrix"
         }
       ],
       "url": "https://leetcode.com/problems/median-of-two-sorted-arrays/"
@@ -1077,7 +1391,7 @@
     {
       "title": "Sum of GCD of Formed Pairs",
       "slug": "sum-of-gcd-of-formed-pairs",
-      "qid": 4242,
+      "qid": "4242",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1136,7 +1450,7 @@
     {
       "title": "Remove Duplicates from Sorted Array",
       "slug": "remove-duplicates-from-sorted-array",
-      "qid": 26,
+      "qid": "26",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1174,24 +1488,24 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Remove Element",
-          "titleSlug": "remove-element",
-          "difficulty": "Easy"
+          "titleSlug": "remove-element"
         },
         {
+          "difficulty": "Medium",
           "title": "Remove Duplicates from Sorted Array II",
-          "titleSlug": "remove-duplicates-from-sorted-array-ii",
-          "difficulty": "Medium"
+          "titleSlug": "remove-duplicates-from-sorted-array-ii"
         },
         {
+          "difficulty": "Easy",
           "title": "Apply Operations to an Array",
-          "titleSlug": "apply-operations-to-an-array",
-          "difficulty": "Easy"
+          "titleSlug": "apply-operations-to-an-array"
         },
         {
+          "difficulty": "Medium",
           "title": "Sum of Distances",
-          "titleSlug": "sum-of-distances",
-          "difficulty": "Medium"
+          "titleSlug": "sum-of-distances"
         }
       ],
       "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/"
@@ -1199,7 +1513,7 @@
     {
       "title": "Reverse Nodes in k-Group",
       "slug": "reverse-nodes-in-k-group",
-      "qid": 25,
+      "qid": "25",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1233,19 +1547,19 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Swap Nodes in Pairs",
-          "titleSlug": "swap-nodes-in-pairs",
-          "difficulty": "Medium"
+          "titleSlug": "swap-nodes-in-pairs"
         },
         {
+          "difficulty": "Medium",
           "title": "Swapping Nodes in a Linked List",
-          "titleSlug": "swapping-nodes-in-a-linked-list",
-          "difficulty": "Medium"
+          "titleSlug": "swapping-nodes-in-a-linked-list"
         },
         {
+          "difficulty": "Medium",
           "title": "Reverse Nodes in Even Length Groups",
-          "titleSlug": "reverse-nodes-in-even-length-groups",
-          "difficulty": "Medium"
+          "titleSlug": "reverse-nodes-in-even-length-groups"
         }
       ],
       "url": "https://leetcode.com/problems/reverse-nodes-in-k-group/"
@@ -1253,7 +1567,7 @@
     {
       "title": "Swap Nodes in Pairs",
       "slug": "swap-nodes-in-pairs",
-      "qid": 24,
+      "qid": "24",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1287,14 +1601,14 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Hard",
           "title": "Reverse Nodes in k-Group",
-          "titleSlug": "reverse-nodes-in-k-group",
-          "difficulty": "Hard"
+          "titleSlug": "reverse-nodes-in-k-group"
         },
         {
+          "difficulty": "Medium",
           "title": "Swapping Nodes in a Linked List",
-          "titleSlug": "swapping-nodes-in-a-linked-list",
-          "difficulty": "Medium"
+          "titleSlug": "swapping-nodes-in-a-linked-list"
         }
       ],
       "url": "https://leetcode.com/problems/swap-nodes-in-pairs/"
@@ -1302,7 +1616,7 @@
     {
       "title": "Merge k Sorted Lists",
       "slug": "merge-k-sorted-lists",
-      "qid": 23,
+      "qid": "23",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1348,19 +1662,19 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Merge Two Sorted Lists",
-          "titleSlug": "merge-two-sorted-lists",
-          "difficulty": "Easy"
+          "titleSlug": "merge-two-sorted-lists"
         },
         {
+          "difficulty": "Medium",
           "title": "Ugly Number II",
-          "titleSlug": "ugly-number-ii",
-          "difficulty": "Medium"
+          "titleSlug": "ugly-number-ii"
         },
         {
+          "difficulty": "Medium",
           "title": "Smallest Subarrays With Maximum Bitwise OR",
-          "titleSlug": "smallest-subarrays-with-maximum-bitwise-or",
-          "difficulty": "Medium"
+          "titleSlug": "smallest-subarrays-with-maximum-bitwise-or"
         }
       ],
       "url": "https://leetcode.com/problems/merge-k-sorted-lists/"
@@ -1368,7 +1682,7 @@
     {
       "title": "Generate Parentheses",
       "slug": "generate-parentheses",
-      "qid": 22,
+      "qid": "22",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1410,19 +1724,19 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Letter Combinations of a Phone Number",
-          "titleSlug": "letter-combinations-of-a-phone-number",
-          "difficulty": "Medium"
+          "titleSlug": "letter-combinations-of-a-phone-number"
         },
         {
+          "difficulty": "Easy",
           "title": "Valid Parentheses",
-          "titleSlug": "valid-parentheses",
-          "difficulty": "Easy"
+          "titleSlug": "valid-parentheses"
         },
         {
+          "difficulty": "Medium",
           "title": "Check if a Parentheses String Can Be Valid",
-          "titleSlug": "check-if-a-parentheses-string-can-be-valid",
-          "difficulty": "Medium"
+          "titleSlug": "check-if-a-parentheses-string-can-be-valid"
         }
       ],
       "url": "https://leetcode.com/problems/generate-parentheses/"
@@ -1430,7 +1744,7 @@
     {
       "title": "Merge Two Sorted Lists",
       "slug": "merge-two-sorted-lists",
-      "qid": 21,
+      "qid": "21",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1464,39 +1778,39 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Hard",
           "title": "Merge k Sorted Lists",
-          "titleSlug": "merge-k-sorted-lists",
-          "difficulty": "Hard"
+          "titleSlug": "merge-k-sorted-lists"
         },
         {
+          "difficulty": "Easy",
           "title": "Merge Sorted Array",
-          "titleSlug": "merge-sorted-array",
-          "difficulty": "Easy"
+          "titleSlug": "merge-sorted-array"
         },
         {
+          "difficulty": "Medium",
           "title": "Sort List",
-          "titleSlug": "sort-list",
-          "difficulty": "Medium"
+          "titleSlug": "sort-list"
         },
         {
+          "difficulty": "Medium",
           "title": "Shortest Word Distance II",
-          "titleSlug": "shortest-word-distance-ii",
-          "difficulty": "Medium"
+          "titleSlug": "shortest-word-distance-ii"
         },
         {
+          "difficulty": "Medium",
           "title": "Add Two Polynomials Represented as Linked Lists",
-          "titleSlug": "add-two-polynomials-represented-as-linked-lists",
-          "difficulty": "Medium"
+          "titleSlug": "add-two-polynomials-represented-as-linked-lists"
         },
         {
+          "difficulty": "Medium",
           "title": "Longest Common Subsequence Between Sorted Arrays",
-          "titleSlug": "longest-common-subsequence-between-sorted-arrays",
-          "difficulty": "Medium"
+          "titleSlug": "longest-common-subsequence-between-sorted-arrays"
         },
         {
+          "difficulty": "Easy",
           "title": "Merge Two 2D Arrays by Summing Values",
-          "titleSlug": "merge-two-2d-arrays-by-summing-values",
-          "difficulty": "Easy"
+          "titleSlug": "merge-two-2d-arrays-by-summing-values"
         }
       ],
       "url": "https://leetcode.com/problems/merge-two-sorted-lists/"
@@ -1504,7 +1818,7 @@
     {
       "title": "Valid Parentheses",
       "slug": "valid-parentheses",
-      "qid": 20,
+      "qid": "20",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1546,34 +1860,34 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Generate Parentheses",
-          "titleSlug": "generate-parentheses",
-          "difficulty": "Medium"
+          "titleSlug": "generate-parentheses"
         },
         {
+          "difficulty": "Hard",
           "title": "Longest Valid Parentheses",
-          "titleSlug": "longest-valid-parentheses",
-          "difficulty": "Hard"
+          "titleSlug": "longest-valid-parentheses"
         },
         {
+          "difficulty": "Hard",
           "title": "Remove Invalid Parentheses",
-          "titleSlug": "remove-invalid-parentheses",
-          "difficulty": "Hard"
+          "titleSlug": "remove-invalid-parentheses"
         },
         {
+          "difficulty": "Medium",
           "title": "Check If Word Is Valid After Substitutions",
-          "titleSlug": "check-if-word-is-valid-after-substitutions",
-          "difficulty": "Medium"
+          "titleSlug": "check-if-word-is-valid-after-substitutions"
         },
         {
+          "difficulty": "Medium",
           "title": "Check if a Parentheses String Can Be Valid",
-          "titleSlug": "check-if-a-parentheses-string-can-be-valid",
-          "difficulty": "Medium"
+          "titleSlug": "check-if-a-parentheses-string-can-be-valid"
         },
         {
+          "difficulty": "Medium",
           "title": "Move Pieces to Obtain a String",
-          "titleSlug": "move-pieces-to-obtain-a-string",
-          "difficulty": "Medium"
+          "titleSlug": "move-pieces-to-obtain-a-string"
         }
       ],
       "url": "https://leetcode.com/problems/valid-parentheses/"
@@ -1581,7 +1895,7 @@
     {
       "title": "Scramble String",
       "slug": "scramble-string",
-      "qid": 87,
+      "qid": "87",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1619,7 +1933,7 @@
     {
       "title": "Partition List",
       "slug": "partition-list",
-      "qid": 86,
+      "qid": "86",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1653,9 +1967,9 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Partition Array According to Given Pivot",
-          "titleSlug": "partition-array-according-to-given-pivot",
-          "difficulty": "Medium"
+          "titleSlug": "partition-array-according-to-given-pivot"
         }
       ],
       "url": "https://leetcode.com/problems/partition-list/"
@@ -1663,7 +1977,7 @@
     {
       "title": "Two Sum",
       "slug": "two-sum",
-      "qid": 1,
+      "qid": "1",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1701,109 +2015,109 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "3Sum",
-          "titleSlug": "3sum",
-          "difficulty": "Medium"
+          "titleSlug": "3sum"
         },
         {
+          "difficulty": "Medium",
           "title": "4Sum",
-          "titleSlug": "4sum",
-          "difficulty": "Medium"
+          "titleSlug": "4sum"
         },
         {
+          "difficulty": "Medium",
           "title": "Two Sum II - Input Array Is Sorted",
-          "titleSlug": "two-sum-ii-input-array-is-sorted",
-          "difficulty": "Medium"
+          "titleSlug": "two-sum-ii-input-array-is-sorted"
         },
         {
+          "difficulty": "Easy",
           "title": "Two Sum III - Data structure design",
-          "titleSlug": "two-sum-iii-data-structure-design",
-          "difficulty": "Easy"
+          "titleSlug": "two-sum-iii-data-structure-design"
         },
         {
+          "difficulty": "Medium",
           "title": "Subarray Sum Equals K",
-          "titleSlug": "subarray-sum-equals-k",
-          "difficulty": "Medium"
+          "titleSlug": "subarray-sum-equals-k"
         },
         {
+          "difficulty": "Easy",
           "title": "Two Sum IV - Input is a BST",
-          "titleSlug": "two-sum-iv-input-is-a-bst",
-          "difficulty": "Easy"
+          "titleSlug": "two-sum-iv-input-is-a-bst"
         },
         {
+          "difficulty": "Easy",
           "title": "Two Sum Less Than K",
-          "titleSlug": "two-sum-less-than-k",
-          "difficulty": "Easy"
+          "titleSlug": "two-sum-less-than-k"
         },
         {
+          "difficulty": "Medium",
           "title": "Max Number of K-Sum Pairs",
-          "titleSlug": "max-number-of-k-sum-pairs",
-          "difficulty": "Medium"
+          "titleSlug": "max-number-of-k-sum-pairs"
         },
         {
+          "difficulty": "Medium",
           "title": "Count Good Meals",
-          "titleSlug": "count-good-meals",
-          "difficulty": "Medium"
+          "titleSlug": "count-good-meals"
         },
         {
+          "difficulty": "Easy",
           "title": "Count Number of Pairs With Absolute Difference K",
-          "titleSlug": "count-number-of-pairs-with-absolute-difference-k",
-          "difficulty": "Easy"
+          "titleSlug": "count-number-of-pairs-with-absolute-difference-k"
         },
         {
+          "difficulty": "Medium",
           "title": "Number of Pairs of Strings With Concatenation Equal to Target",
-          "titleSlug": "number-of-pairs-of-strings-with-concatenation-equal-to-target",
-          "difficulty": "Medium"
+          "titleSlug": "number-of-pairs-of-strings-with-concatenation-equal-to-target"
         },
         {
+          "difficulty": "Easy",
           "title": "Find All K-Distant Indices in an Array",
-          "titleSlug": "find-all-k-distant-indices-in-an-array",
-          "difficulty": "Easy"
+          "titleSlug": "find-all-k-distant-indices-in-an-array"
         },
         {
+          "difficulty": "Easy",
           "title": "First Letter to Appear Twice",
-          "titleSlug": "first-letter-to-appear-twice",
-          "difficulty": "Easy"
+          "titleSlug": "first-letter-to-appear-twice"
         },
         {
+          "difficulty": "Hard",
           "title": "Number of Excellent Pairs",
-          "titleSlug": "number-of-excellent-pairs",
-          "difficulty": "Hard"
+          "titleSlug": "number-of-excellent-pairs"
         },
         {
+          "difficulty": "Easy",
           "title": "Number of Arithmetic Triplets",
-          "titleSlug": "number-of-arithmetic-triplets",
-          "difficulty": "Easy"
+          "titleSlug": "number-of-arithmetic-triplets"
         },
         {
+          "difficulty": "Medium",
           "title": "Node With Highest Edge Score",
-          "titleSlug": "node-with-highest-edge-score",
-          "difficulty": "Medium"
+          "titleSlug": "node-with-highest-edge-score"
         },
         {
+          "difficulty": "Easy",
           "title": "Check Distances Between Same Letters",
-          "titleSlug": "check-distances-between-same-letters",
-          "difficulty": "Easy"
+          "titleSlug": "check-distances-between-same-letters"
         },
         {
+          "difficulty": "Easy",
           "title": "Find Subarrays With Equal Sum",
-          "titleSlug": "find-subarrays-with-equal-sum",
-          "difficulty": "Easy"
+          "titleSlug": "find-subarrays-with-equal-sum"
         },
         {
+          "difficulty": "Easy",
           "title": "Largest Positive Integer That Exists With Its Negative",
-          "titleSlug": "largest-positive-integer-that-exists-with-its-negative",
-          "difficulty": "Easy"
+          "titleSlug": "largest-positive-integer-that-exists-with-its-negative"
         },
         {
+          "difficulty": "Easy",
           "title": "Number of Distinct Averages",
-          "titleSlug": "number-of-distinct-averages",
-          "difficulty": "Easy"
+          "titleSlug": "number-of-distinct-averages"
         },
         {
+          "difficulty": "Easy",
           "title": "Count Pairs Whose Sum is Less than Target",
-          "titleSlug": "count-pairs-whose-sum-is-less-than-target",
-          "difficulty": "Easy"
+          "titleSlug": "count-pairs-whose-sum-is-less-than-target"
         }
       ],
       "url": "https://leetcode.com/problems/two-sum/"
@@ -1811,7 +2125,7 @@
     {
       "title": "Same Tree",
       "slug": "same-tree",
-      "qid": 100,
+      "qid": "100",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1857,7 +2171,7 @@
     {
       "title": "Reverse Integer",
       "slug": "reverse-integer",
-      "qid": 7,
+      "qid": "7",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1887,24 +2201,24 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "String to Integer (atoi)",
-          "titleSlug": "string-to-integer-atoi",
-          "difficulty": "Medium"
+          "titleSlug": "string-to-integer-atoi"
         },
         {
+          "difficulty": "Easy",
           "title": "Reverse Bits",
-          "titleSlug": "reverse-bits",
-          "difficulty": "Easy"
+          "titleSlug": "reverse-bits"
         },
         {
+          "difficulty": "Easy",
           "title": "A Number After a Double Reversal",
-          "titleSlug": "a-number-after-a-double-reversal",
-          "difficulty": "Easy"
+          "titleSlug": "a-number-after-a-double-reversal"
         },
         {
+          "difficulty": "Medium",
           "title": "Count Number of Distinct Integers After Reverse Operations",
-          "titleSlug": "count-number-of-distinct-integers-after-reverse-operations",
-          "difficulty": "Medium"
+          "titleSlug": "count-number-of-distinct-integers-after-reverse-operations"
         }
       ],
       "url": "https://leetcode.com/problems/reverse-integer/"
@@ -1912,7 +2226,7 @@
     {
       "title": "Longest Substring Without Repeating Characters",
       "slug": "longest-substring-without-repeating-characters",
-      "qid": 3,
+      "qid": "3",
       "files": [
         {
           "filename": "solution.cpp",
@@ -1952,59 +2266,59 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Longest Substring with At Most Two Distinct Characters",
-          "titleSlug": "longest-substring-with-at-most-two-distinct-characters",
-          "difficulty": "Medium"
+          "titleSlug": "longest-substring-with-at-most-two-distinct-characters"
         },
         {
+          "difficulty": "Medium",
           "title": "Longest Substring with At Most K Distinct Characters",
-          "titleSlug": "longest-substring-with-at-most-k-distinct-characters",
-          "difficulty": "Medium"
+          "titleSlug": "longest-substring-with-at-most-k-distinct-characters"
         },
         {
+          "difficulty": "Hard",
           "title": "Subarrays with K Different Integers",
-          "titleSlug": "subarrays-with-k-different-integers",
-          "difficulty": "Hard"
+          "titleSlug": "subarrays-with-k-different-integers"
         },
         {
+          "difficulty": "Medium",
           "title": "Maximum Erasure Value",
-          "titleSlug": "maximum-erasure-value",
-          "difficulty": "Medium"
+          "titleSlug": "maximum-erasure-value"
         },
         {
+          "difficulty": "Medium",
           "title": "Number of Equal Count Substrings",
-          "titleSlug": "number-of-equal-count-substrings",
-          "difficulty": "Medium"
+          "titleSlug": "number-of-equal-count-substrings"
         },
         {
+          "difficulty": "Medium",
           "title": "Minimum Consecutive Cards to Pick Up",
-          "titleSlug": "minimum-consecutive-cards-to-pick-up",
-          "difficulty": "Medium"
+          "titleSlug": "minimum-consecutive-cards-to-pick-up"
         },
         {
+          "difficulty": "Medium",
           "title": "Longest Nice Subarray",
-          "titleSlug": "longest-nice-subarray",
-          "difficulty": "Medium"
+          "titleSlug": "longest-nice-subarray"
         },
         {
+          "difficulty": "Medium",
           "title": "Optimal Partition of String",
-          "titleSlug": "optimal-partition-of-string",
-          "difficulty": "Medium"
+          "titleSlug": "optimal-partition-of-string"
         },
         {
+          "difficulty": "Medium",
           "title": "Count Complete Subarrays in an Array",
-          "titleSlug": "count-complete-subarrays-in-an-array",
-          "difficulty": "Medium"
+          "titleSlug": "count-complete-subarrays-in-an-array"
         },
         {
+          "difficulty": "Medium",
           "title": "Find Longest Special Substring That Occurs Thrice II",
-          "titleSlug": "find-longest-special-substring-that-occurs-thrice-ii",
-          "difficulty": "Medium"
+          "titleSlug": "find-longest-special-substring-that-occurs-thrice-ii"
         },
         {
+          "difficulty": "Medium",
           "title": "Find Longest Special Substring That Occurs Thrice I",
-          "titleSlug": "find-longest-special-substring-that-occurs-thrice-i",
-          "difficulty": "Medium"
+          "titleSlug": "find-longest-special-substring-that-occurs-thrice-i"
         }
       ],
       "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/"
@@ -2012,7 +2326,7 @@
     {
       "title": "Stone Game",
       "slug": "stone-game",
-      "qid": 909,
+      "qid": "909",
       "files": [
         {
           "filename": "solution.rkt",
@@ -2260,39 +2574,39 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Hard",
           "title": "Stone Game V",
-          "titleSlug": "stone-game-v",
-          "difficulty": "Hard"
+          "titleSlug": "stone-game-v"
         },
         {
+          "difficulty": "Medium",
           "title": "Stone Game VI",
-          "titleSlug": "stone-game-vi",
-          "difficulty": "Medium"
+          "titleSlug": "stone-game-vi"
         },
         {
+          "difficulty": "Medium",
           "title": "Stone Game VII",
-          "titleSlug": "stone-game-vii",
-          "difficulty": "Medium"
+          "titleSlug": "stone-game-vii"
         },
         {
+          "difficulty": "Hard",
           "title": "Stone Game VIII",
-          "titleSlug": "stone-game-viii",
-          "difficulty": "Hard"
+          "titleSlug": "stone-game-viii"
         },
         {
+          "difficulty": "Medium",
           "title": "Stone Game IX",
-          "titleSlug": "stone-game-ix",
-          "difficulty": "Medium"
+          "titleSlug": "stone-game-ix"
         },
         {
+          "difficulty": "Medium",
           "title": "Strictly Palindromic Number",
-          "titleSlug": "strictly-palindromic-number",
-          "difficulty": "Medium"
+          "titleSlug": "strictly-palindromic-number"
         },
         {
+          "difficulty": "Medium",
           "title": "Visit Array Positions to Maximize Score",
-          "titleSlug": "visit-array-positions-to-maximize-score",
-          "difficulty": "Medium"
+          "titleSlug": "visit-array-positions-to-maximize-score"
         }
       ],
       "url": "https://leetcode.com/problems/stone-game/"
@@ -2300,7 +2614,7 @@
     {
       "title": "Contains Duplicate III",
       "slug": "contains-duplicate-iii",
-      "qid": 220,
+      "qid": "220",
       "files": [
         {
           "filename": "solution.cpp",
@@ -2349,14 +2663,14 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Contains Duplicate",
-          "titleSlug": "contains-duplicate",
-          "difficulty": "Easy"
+          "titleSlug": "contains-duplicate"
         },
         {
+          "difficulty": "Easy",
           "title": "Contains Duplicate II",
-          "titleSlug": "contains-duplicate-ii",
-          "difficulty": "Easy"
+          "titleSlug": "contains-duplicate-ii"
         }
       ],
       "url": "https://leetcode.com/problems/contains-duplicate-iii/"
@@ -2364,7 +2678,7 @@
     {
       "title": "Nth Magical Number",
       "slug": "nth-magical-number",
-      "qid": 910,
+      "qid": "910",
       "files": [
         {
           "filename": "solution.cpp",
@@ -2410,7 +2724,7 @@
     {
       "title": "Longest Common Prefix",
       "slug": "longest-common-prefix",
-      "qid": 14,
+      "qid": "14",
       "files": [
         {
           "filename": "solution.py",
@@ -2448,24 +2762,24 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Smallest Missing Integer Greater Than Sequential Prefix Sum",
-          "titleSlug": "smallest-missing-integer-greater-than-sequential-prefix-sum",
-          "difficulty": "Easy"
+          "titleSlug": "smallest-missing-integer-greater-than-sequential-prefix-sum"
         },
         {
+          "difficulty": "Medium",
           "title": "Find the Length of the Longest Common Prefix",
-          "titleSlug": "find-the-length-of-the-longest-common-prefix",
-          "difficulty": "Medium"
+          "titleSlug": "find-the-length-of-the-longest-common-prefix"
         },
         {
+          "difficulty": "Hard",
           "title": "Longest Common Suffix Queries",
-          "titleSlug": "longest-common-suffix-queries",
-          "difficulty": "Hard"
+          "titleSlug": "longest-common-suffix-queries"
         },
         {
+          "difficulty": "Medium",
           "title": "Longest Common Prefix After at Most One Removal",
-          "titleSlug": "longest-common-prefix-after-at-most-one-removal",
-          "difficulty": "Medium"
+          "titleSlug": "longest-common-prefix-after-at-most-one-removal"
         }
       ],
       "url": "https://leetcode.com/problems/longest-common-prefix/"
@@ -2473,7 +2787,7 @@
     {
       "title": "Zigzag Conversion",
       "slug": "zigzag-conversion",
-      "qid": 6,
+      "qid": "6",
       "files": [
         {
           "filename": "solution.cpp",
@@ -2507,7 +2821,7 @@
     {
       "title": "Palindrome Pairs",
       "slug": "palindrome-pairs",
-      "qid": 336,
+      "qid": "336",
       "files": [
         {
           "filename": "solution.cpp",
@@ -2557,24 +2871,24 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Longest Palindromic Substring",
-          "titleSlug": "longest-palindromic-substring",
-          "difficulty": "Medium"
+          "titleSlug": "longest-palindromic-substring"
         },
         {
+          "difficulty": "Hard",
           "title": "Shortest Palindrome",
-          "titleSlug": "shortest-palindrome",
-          "difficulty": "Hard"
+          "titleSlug": "shortest-palindrome"
         },
         {
+          "difficulty": "Medium",
           "title": "Longest Palindrome by Concatenating Two Letter Words",
-          "titleSlug": "longest-palindrome-by-concatenating-two-letter-words",
-          "difficulty": "Medium"
+          "titleSlug": "longest-palindrome-by-concatenating-two-letter-words"
         },
         {
+          "difficulty": "Easy",
           "title": "Find Maximum Number of String Pairs",
-          "titleSlug": "find-maximum-number-of-string-pairs",
-          "difficulty": "Easy"
+          "titleSlug": "find-maximum-number-of-string-pairs"
         }
       ],
       "url": "https://leetcode.com/problems/palindrome-pairs/"
@@ -2582,7 +2896,7 @@
     {
       "title": "Divisible and Non-divisible Sums Difference",
       "slug": "divisible-and-non-divisible-sums-difference",
-      "qid": 3172,
+      "qid": "3172",
       "files": [
         {
           "filename": "solution.c",
@@ -2640,7 +2954,7 @@
     {
       "title": "Insert Greatest Common Divisors in Linked List",
       "slug": "insert-greatest-common-divisors-in-linked-list",
-      "qid": 2903,
+      "qid": "2903",
       "files": [
         {
           "filename": "solution.cpp",
@@ -2678,9 +2992,9 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Reverse Linked List",
-          "titleSlug": "reverse-linked-list",
-          "difficulty": "Easy"
+          "titleSlug": "reverse-linked-list"
         }
       ],
       "url": "https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/"
@@ -2688,7 +3002,7 @@
     {
       "title": "Move Zeroes",
       "slug": "move-zeroes",
-      "qid": 283,
+      "qid": "283",
       "files": [
         {
           "filename": "solution.cpp",
@@ -2725,14 +3039,14 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Remove Element",
-          "titleSlug": "remove-element",
-          "difficulty": "Easy"
+          "titleSlug": "remove-element"
         },
         {
+          "difficulty": "Easy",
           "title": "Apply Operations to an Array",
-          "titleSlug": "apply-operations-to-an-array",
-          "difficulty": "Easy"
+          "titleSlug": "apply-operations-to-an-array"
         }
       ],
       "url": "https://leetcode.com/problems/move-zeroes/"
@@ -2740,7 +3054,7 @@
     {
       "title": "Remove Element",
       "slug": "remove-element",
-      "qid": 27,
+      "qid": "27",
       "files": [
         {
           "filename": "solution.cpp",
@@ -2778,19 +3092,19 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Remove Duplicates from Sorted Array",
-          "titleSlug": "remove-duplicates-from-sorted-array",
-          "difficulty": "Easy"
+          "titleSlug": "remove-duplicates-from-sorted-array"
         },
         {
+          "difficulty": "Easy",
           "title": "Remove Linked List Elements",
-          "titleSlug": "remove-linked-list-elements",
-          "difficulty": "Easy"
+          "titleSlug": "remove-linked-list-elements"
         },
         {
+          "difficulty": "Easy",
           "title": "Move Zeroes",
-          "titleSlug": "move-zeroes",
-          "difficulty": "Easy"
+          "titleSlug": "move-zeroes"
         }
       ],
       "url": "https://leetcode.com/problems/remove-element/"
@@ -2798,7 +3112,7 @@
     {
       "title": "Perfect Squares",
       "slug": "perfect-squares",
-      "qid": 279,
+      "qid": "279",
       "files": [
         {
           "filename": "solution.js",
@@ -2844,19 +3158,19 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Count Primes",
-          "titleSlug": "count-primes",
-          "difficulty": "Medium"
+          "titleSlug": "count-primes"
         },
         {
+          "difficulty": "Medium",
           "title": "Ugly Number II",
-          "titleSlug": "ugly-number-ii",
-          "difficulty": "Medium"
+          "titleSlug": "ugly-number-ii"
         },
         {
+          "difficulty": "Medium",
           "title": "Ways to Express an Integer as Sum of Powers",
-          "titleSlug": "ways-to-express-an-integer-as-sum-of-powers",
-          "difficulty": "Medium"
+          "titleSlug": "ways-to-express-an-integer-as-sum-of-powers"
         }
       ],
       "url": "https://leetcode.com/problems/perfect-squares/"
@@ -2864,7 +3178,7 @@
     {
       "title": "Sliding Puzzle",
       "slug": "sliding-puzzle",
-      "qid": 787,
+      "qid": "787",
       "files": [
         {
           "filename": "solution.cpp",
@@ -2932,7 +3246,7 @@
     {
       "title": "Basic Calculator II",
       "slug": "basic-calculator-ii",
-      "qid": 227,
+      "qid": "227",
       "files": [
         {
           "filename": "solution.cpp",
@@ -2970,24 +3284,24 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Hard",
           "title": "Basic Calculator",
-          "titleSlug": "basic-calculator",
-          "difficulty": "Hard"
+          "titleSlug": "basic-calculator"
         },
         {
+          "difficulty": "Hard",
           "title": "Expression Add Operators",
-          "titleSlug": "expression-add-operators",
-          "difficulty": "Hard"
+          "titleSlug": "expression-add-operators"
         },
         {
+          "difficulty": "Hard",
           "title": "Basic Calculator III",
-          "titleSlug": "basic-calculator-iii",
-          "difficulty": "Hard"
+          "titleSlug": "basic-calculator-iii"
         },
         {
+          "difficulty": "Hard",
           "title": "Evaluate Valid Expressions",
-          "titleSlug": "evaluate-valid-expressions",
-          "difficulty": "Hard"
+          "titleSlug": "evaluate-valid-expressions"
         }
       ],
       "url": "https://leetcode.com/problems/basic-calculator-ii/"
@@ -2995,7 +3309,7 @@
     {
       "title": "Basic Calculator",
       "slug": "basic-calculator",
-      "qid": 224,
+      "qid": "224",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3037,39 +3351,39 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Evaluate Reverse Polish Notation",
-          "titleSlug": "evaluate-reverse-polish-notation",
-          "difficulty": "Medium"
+          "titleSlug": "evaluate-reverse-polish-notation"
         },
         {
+          "difficulty": "Medium",
           "title": "Basic Calculator II",
-          "titleSlug": "basic-calculator-ii",
-          "difficulty": "Medium"
+          "titleSlug": "basic-calculator-ii"
         },
         {
+          "difficulty": "Medium",
           "title": "Different Ways to Add Parentheses",
-          "titleSlug": "different-ways-to-add-parentheses",
-          "difficulty": "Medium"
+          "titleSlug": "different-ways-to-add-parentheses"
         },
         {
+          "difficulty": "Hard",
           "title": "Expression Add Operators",
-          "titleSlug": "expression-add-operators",
-          "difficulty": "Hard"
+          "titleSlug": "expression-add-operators"
         },
         {
+          "difficulty": "Hard",
           "title": "Basic Calculator III",
-          "titleSlug": "basic-calculator-iii",
-          "difficulty": "Hard"
+          "titleSlug": "basic-calculator-iii"
         },
         {
+          "difficulty": "Hard",
           "title": "The Score of Students Solving Math Expression",
-          "titleSlug": "the-score-of-students-solving-math-expression",
-          "difficulty": "Hard"
+          "titleSlug": "the-score-of-students-solving-math-expression"
         },
         {
+          "difficulty": "Medium",
           "title": "Minimize Result by Adding Parentheses to Expression",
-          "titleSlug": "minimize-result-by-adding-parentheses-to-expression",
-          "difficulty": "Medium"
+          "titleSlug": "minimize-result-by-adding-parentheses-to-expression"
         }
       ],
       "url": "https://leetcode.com/problems/basic-calculator/"
@@ -3077,7 +3391,7 @@
     {
       "title": "Stone Game IV",
       "slug": "stone-game-iv",
-      "qid": 1617,
+      "qid": "1617",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3133,34 +3447,34 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Hard",
           "title": "Stone Game V",
-          "titleSlug": "stone-game-v",
-          "difficulty": "Hard"
+          "titleSlug": "stone-game-v"
         },
         {
+          "difficulty": "Medium",
           "title": "Stone Game VI",
-          "titleSlug": "stone-game-vi",
-          "difficulty": "Medium"
+          "titleSlug": "stone-game-vi"
         },
         {
+          "difficulty": "Medium",
           "title": "Stone Game VII",
-          "titleSlug": "stone-game-vii",
-          "difficulty": "Medium"
+          "titleSlug": "stone-game-vii"
         },
         {
+          "difficulty": "Hard",
           "title": "Stone Game VIII",
-          "titleSlug": "stone-game-viii",
-          "difficulty": "Hard"
+          "titleSlug": "stone-game-viii"
         },
         {
+          "difficulty": "Medium",
           "title": "Stone Game IX",
-          "titleSlug": "stone-game-ix",
-          "difficulty": "Medium"
+          "titleSlug": "stone-game-ix"
         },
         {
+          "difficulty": "Easy",
           "title": "Stone Removal Game",
-          "titleSlug": "stone-removal-game",
-          "difficulty": "Easy"
+          "titleSlug": "stone-removal-game"
         }
       ],
       "url": "https://leetcode.com/problems/stone-game-iv/"
@@ -3168,7 +3482,7 @@
     {
       "title": "Count Total Number of Colored Cells",
       "slug": "count-total-number-of-colored-cells",
-      "qid": 2649,
+      "qid": "2649",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3200,9 +3514,9 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Minimum Cuts to Divide a Circle",
-          "titleSlug": "minimum-cuts-to-divide-a-circle",
-          "difficulty": "Easy"
+          "titleSlug": "minimum-cuts-to-divide-a-circle"
         }
       ],
       "url": "https://leetcode.com/problems/count-total-number-of-colored-cells/"
@@ -3210,7 +3524,7 @@
     {
       "title": "Minimum Cuts to Divide a Circle",
       "slug": "minimum-cuts-to-divide-a-circle",
-      "qid": 2575,
+      "qid": "2575",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3247,14 +3561,14 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Smallest Even Multiple",
-          "titleSlug": "smallest-even-multiple",
-          "difficulty": "Easy"
+          "titleSlug": "smallest-even-multiple"
         },
         {
+          "difficulty": "Medium",
           "title": "Count Total Number of Colored Cells",
-          "titleSlug": "count-total-number-of-colored-cells",
-          "difficulty": "Medium"
+          "titleSlug": "count-total-number-of-colored-cells"
         }
       ],
       "url": "https://leetcode.com/problems/minimum-cuts-to-divide-a-circle/"
@@ -3262,7 +3576,7 @@
     {
       "title": "Smallest Even Multiple",
       "slug": "smallest-even-multiple",
-      "qid": 2491,
+      "qid": "2491",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3299,29 +3613,29 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Greatest Common Divisor of Strings",
-          "titleSlug": "greatest-common-divisor-of-strings",
-          "difficulty": "Easy"
+          "titleSlug": "greatest-common-divisor-of-strings"
         },
         {
+          "difficulty": "Easy",
           "title": "Three Divisors",
-          "titleSlug": "three-divisors",
-          "difficulty": "Easy"
+          "titleSlug": "three-divisors"
         },
         {
+          "difficulty": "Easy",
           "title": "Find Greatest Common Divisor of Array",
-          "titleSlug": "find-greatest-common-divisor-of-array",
-          "difficulty": "Easy"
+          "titleSlug": "find-greatest-common-divisor-of-array"
         },
         {
+          "difficulty": "Easy",
           "title": "Convert the Temperature",
-          "titleSlug": "convert-the-temperature",
-          "difficulty": "Easy"
+          "titleSlug": "convert-the-temperature"
         },
         {
+          "difficulty": "Easy",
           "title": "Minimum Cuts to Divide a Circle",
-          "titleSlug": "minimum-cuts-to-divide-a-circle",
-          "difficulty": "Easy"
+          "titleSlug": "minimum-cuts-to-divide-a-circle"
         }
       ],
       "url": "https://leetcode.com/problems/smallest-even-multiple/"
@@ -3329,7 +3643,7 @@
     {
       "title": "Convert the Temperature",
       "slug": "convert-the-temperature",
-      "qid": 2556,
+      "qid": "2556",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3361,9 +3675,9 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Smallest Even Multiple",
-          "titleSlug": "smallest-even-multiple",
-          "difficulty": "Easy"
+          "titleSlug": "smallest-even-multiple"
         }
       ],
       "url": "https://leetcode.com/problems/convert-the-temperature/"
@@ -3371,7 +3685,7 @@
     {
       "title": "Combine Two Tables",
       "slug": "combine-two-tables",
-      "qid": 175,
+      "qid": "175",
       "files": [
         {
           "filename": "solution.pythondata",
@@ -3445,9 +3759,9 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Employee Bonus",
-          "titleSlug": "employee-bonus",
-          "difficulty": "Easy"
+          "titleSlug": "employee-bonus"
         }
       ],
       "url": "https://leetcode.com/problems/combine-two-tables/"
@@ -3455,7 +3769,7 @@
     {
       "title": "Add Two Numbers",
       "slug": "add-two-numbers",
-      "qid": 2,
+      "qid": "2",
       "files": [
         {
           "filename": "Solution.java",
@@ -3493,44 +3807,44 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Multiply Strings",
-          "titleSlug": "multiply-strings",
-          "difficulty": "Medium"
+          "titleSlug": "multiply-strings"
         },
         {
+          "difficulty": "Easy",
           "title": "Add Binary",
-          "titleSlug": "add-binary",
-          "difficulty": "Easy"
+          "titleSlug": "add-binary"
         },
         {
+          "difficulty": "Medium",
           "title": "Sum of Two Integers",
-          "titleSlug": "sum-of-two-integers",
-          "difficulty": "Medium"
+          "titleSlug": "sum-of-two-integers"
         },
         {
+          "difficulty": "Easy",
           "title": "Add Strings",
-          "titleSlug": "add-strings",
-          "difficulty": "Easy"
+          "titleSlug": "add-strings"
         },
         {
+          "difficulty": "Medium",
           "title": "Add Two Numbers II",
-          "titleSlug": "add-two-numbers-ii",
-          "difficulty": "Medium"
+          "titleSlug": "add-two-numbers-ii"
         },
         {
+          "difficulty": "Easy",
           "title": "Add to Array-Form of Integer",
-          "titleSlug": "add-to-array-form-of-integer",
-          "difficulty": "Easy"
+          "titleSlug": "add-to-array-form-of-integer"
         },
         {
+          "difficulty": "Medium",
           "title": "Add Two Polynomials Represented as Linked Lists",
-          "titleSlug": "add-two-polynomials-represented-as-linked-lists",
-          "difficulty": "Medium"
+          "titleSlug": "add-two-polynomials-represented-as-linked-lists"
         },
         {
+          "difficulty": "Medium",
           "title": "Double a Number Represented as a Linked List",
-          "titleSlug": "double-a-number-represented-as-a-linked-list",
-          "difficulty": "Medium"
+          "titleSlug": "double-a-number-represented-as-a-linked-list"
         }
       ],
       "url": "https://leetcode.com/problems/add-two-numbers/"
@@ -3538,7 +3852,7 @@
     {
       "title": "Word Frequency",
       "slug": "word-frequency",
-      "qid": 192,
+      "qid": "192",
       "files": [
         {
           "filename": "solution.sh",
@@ -3568,9 +3882,9 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Top K Frequent Elements",
-          "titleSlug": "top-k-frequent-elements",
-          "difficulty": "Medium"
+          "titleSlug": "top-k-frequent-elements"
         }
       ],
       "url": "https://leetcode.com/problems/word-frequency/"
@@ -3578,7 +3892,7 @@
     {
       "title": "Nim Game",
       "slug": "nim-game",
-      "qid": 292,
+      "qid": "292",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3630,9 +3944,9 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Flip Game II",
-          "titleSlug": "flip-game-ii",
-          "difficulty": "Medium"
+          "titleSlug": "flip-game-ii"
         }
       ],
       "url": "https://leetcode.com/problems/nim-game/"
@@ -3640,7 +3954,7 @@
     {
       "title": "Bulb Switcher",
       "slug": "bulb-switcher",
-      "qid": 319,
+      "qid": "319",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3674,24 +3988,24 @@
       "hints": [],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Bulb Switcher II",
-          "titleSlug": "bulb-switcher-ii",
-          "difficulty": "Medium"
+          "titleSlug": "bulb-switcher-ii"
         },
         {
+          "difficulty": "Hard",
           "title": "Minimum Number of K Consecutive Bit Flips",
-          "titleSlug": "minimum-number-of-k-consecutive-bit-flips",
-          "difficulty": "Hard"
+          "titleSlug": "minimum-number-of-k-consecutive-bit-flips"
         },
         {
+          "difficulty": "Medium",
           "title": "Number of Times Binary String Is Prefix-Aligned",
-          "titleSlug": "number-of-times-binary-string-is-prefix-aligned",
-          "difficulty": "Medium"
+          "titleSlug": "number-of-times-binary-string-is-prefix-aligned"
         },
         {
+          "difficulty": "Easy",
           "title": "Find the Pivot Integer",
-          "titleSlug": "find-the-pivot-integer",
-          "difficulty": "Easy"
+          "titleSlug": "find-the-pivot-integer"
         }
       ],
       "url": "https://leetcode.com/problems/bulb-switcher/"
@@ -3699,7 +4013,7 @@
     {
       "title": "Chalkboard XOR Game",
       "slug": "chalkboard-xor-game",
-      "qid": 828,
+      "qid": "828",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3757,7 +4071,7 @@
     {
       "title": "Divisor Game",
       "slug": "divisor-game",
-      "qid": 1086,
+      "qid": "1086",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3809,7 +4123,7 @@
     {
       "title": "Airplane Seat Assignment Probability",
       "slug": "airplane-seat-assignment-probability",
-      "qid": 1362,
+      "qid": "1362",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3859,7 +4173,7 @@
     {
       "title": "Last Moment Before All Ants Fall Out of a Plank",
       "slug": "last-moment-before-all-ants-fall-out-of-a-plank",
-      "qid": 1627,
+      "qid": "1627",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3900,14 +4214,14 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Count Collisions on a Road",
-          "titleSlug": "count-collisions-on-a-road",
-          "difficulty": "Medium"
+          "titleSlug": "count-collisions-on-a-road"
         },
         {
+          "difficulty": "Medium",
           "title": "Movement of Robots",
-          "titleSlug": "movement-of-robots",
-          "difficulty": "Medium"
+          "titleSlug": "movement-of-robots"
         }
       ],
       "url": "https://leetcode.com/problems/last-moment-before-all-ants-fall-out-of-a-plank/"
@@ -3915,7 +4229,7 @@
     {
       "title": "Number of Substrings Containing All Three Characters",
       "slug": "number-of-substrings-containing-all-three-characters",
-      "qid": 1460,
+      "qid": "1460",
       "files": [
         {
           "filename": "solution.cpp",
@@ -3956,14 +4270,14 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Medium",
           "title": "Vowels of All Substrings",
-          "titleSlug": "vowels-of-all-substrings",
-          "difficulty": "Medium"
+          "titleSlug": "vowels-of-all-substrings"
         },
         {
+          "difficulty": "Hard",
           "title": "Count Complete Substrings",
-          "titleSlug": "count-complete-substrings",
-          "difficulty": "Hard"
+          "titleSlug": "count-complete-substrings"
         }
       ],
       "url": "https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/"
@@ -3971,7 +4285,7 @@
     {
       "title": "Strictly Palindromic Number",
       "slug": "strictly-palindromic-number",
-      "qid": 2481,
+      "qid": "2481",
       "files": [
         {
           "filename": "solution.cpp",
@@ -4012,14 +4326,14 @@
       ],
       "similarQuestions": [
         {
+          "difficulty": "Easy",
           "title": "Palindrome Number",
-          "titleSlug": "palindrome-number",
-          "difficulty": "Easy"
+          "titleSlug": "palindrome-number"
         },
         {
+          "difficulty": "Medium",
           "title": "Stone Game",
-          "titleSlug": "stone-game",
-          "difficulty": "Medium"
+          "titleSlug": "stone-game"
         }
       ],
       "url": "https://leetcode.com/problems/strictly-palindromic-number/"

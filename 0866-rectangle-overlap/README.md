@@ -4,11 +4,11 @@
 |----------|-------|
 | Difficulty | 🟢 Easy |
 | Acceptance Rate | 47.0% |
-| Language | C++ |
+| Language | Elixir |
 | Status | ✅ Accepted |
 | Runtime | 0 ms |
-| Memory | 9.8 MB |
-| Submission ID | 2143495675 |
+| Memory | 56.4 MB |
+| Submission ID | 2143575403 |
 | Solved On | 16 Sep 2026 |
 
 ---
@@ -79,8 +79,8 @@ No notes provided.
 
 | Language | Runtime | Memory | File |
 |----------|---------|--------|------|
-| C++ | 0 ms | 9.8 MB | [solution.cpp](./solution.cpp) |
 | Elixir | 0 ms | 56.4 MB | [solution.ex](./solution.ex) |
+| C++ | 0 ms | 9.8 MB | [solution.cpp](./solution.cpp) |
 
 ---
 Generated automatically using [LeetVault](https://github.com/vedant476/LeetVault).
