@@ -126,4 +126,4 @@ No notes provided.
 | C | N/A | N/A | [solution.c](./solution.c) |
 
 ---
-Generated automatically using [LeetVault](https://github.com/vedant476/LeetVault).
+Generated using [LeetVault](https://github.com/vedant476/LeetVault).
