@@ -8,8 +8,8 @@
 | Status | ❌ Wrong Answer |
 | Runtime | N/A |
 | Memory | N/A |
-| Submission ID | 2097792015 |
-| Solved On | 07 Aug 2026 |
+| Submission ID | 2144917371 |
+| Solved On | 17 Sep 2026 |
 
 ---
 

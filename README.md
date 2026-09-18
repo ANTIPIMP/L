@@ -14,12 +14,12 @@
 
 | Metric | Count |
 |---------|------:|
-| Problems Solved | 68 |
+| Problemsss Solved | 68 |
 | Easy | 27 |
 | Medium | 30 |
 | Hard | 11 |
 | Languages | Bash, C, C#, C++, Dart, Elixir, Erlang, Go, Java, JavaScript, Kotlin, MS SQL Server, MySQL, Oracle SQL, PHP, PostgreSQL, Python, Python3, Racket, Ruby, Rust, Scala, Swift, TypeScript, pythondata |
-| Last Sync | 17 Sep 2026 |
+| Last Sync | 18 Sep 2026 |
 
 ---
 
@@ -45,6 +45,7 @@
 
 | # | Problem | Difficulty | Solution |
 |---|---------|------------|----------|
+| 0416 | Partition Equal Subset Sum | 🟡 Medium | [View](./0416-partition-equal-subset-sum/) |
 | 0739 | Daily Temperatures | 🟡 Medium | [View](./0739-daily-temperatures/) |
 | 0740 | Delete and Earn | 🟡 Medium | [View](./0740-delete-and-earn/) |
 | 4258 | Construct Uniform Parity Array II | 🟡 Medium | [View](./4258-construct-uniform-parity-array-ii/) |
@@ -52,7 +53,6 @@
 | 0035 | Search Insert Position | 🟢 Easy | [View](./0035-search-insert-position/) |
 | 1635 | Number of Good Pairs | 🟢 Easy | [View](./1635-number-of-good-pairs/) |
 | 3236 | Smallest Missing Integer Greater Than Sequential Prefix Sum | 🟢 Easy | [View](./3236-smallest-missing-integer-greater-than-sequential-prefix-sum/) |
-| 0416 | Partition Equal Subset Sum | 🟡 Medium | [View](./0416-partition-equal-subset-sum/) |
 | 3820 | Number of Unique XOR Triplets II | 🟡 Medium | [View](./3820-number-of-unique-xor-triplets-ii/) |
 | 4280 | Count Digit Appearances | 🟡 Medium | [View](./4280-count-digit-appearances/) |
 | 2609 | Distinct Prime Factors of Product of Array | 🟡 Medium | [View](./2609-distinct-prime-factors-of-product-of-array/) |
@@ -212,8 +212,8 @@
 
 | # | Problem | Difficulty | Solution |
 |---|---------|------------|----------|
-| 0740 | Delete and Earn | 🟡 Medium | [View](./0740-delete-and-earn/) |
 | 0416 | Partition Equal Subset Sum | 🟡 Medium | [View](./0416-partition-equal-subset-sum/) |
+| 0740 | Delete and Earn | 🟡 Medium | [View](./0740-delete-and-earn/) |
 | 0005 | Longest Palindromic Substring | 🟡 Medium | [View](./0005-longest-palindromic-substring/) |
 | 0022 | Generate Parentheses | 🟡 Medium | [View](./0022-generate-parentheses/) |
 | 0087 | Scramble String | 🔴 Hard | [View](./0087-scramble-string/) |
@@ -680,6 +680,7 @@
 
 | Date | Problem | Difficulty | Language |
 |------|----------|------------|----------|
+| 17 Sep 2026 | Partition Equal Subset Sum | 🟡 Medium | C++ |
 | 16 Sep 2026 | Daily Temperatures | 🟡 Medium | C++ |
 | 16 Sep 2026 | Delete and Earn | 🟡 Medium | C++ |
 | 16 Sep 2026 | String to Integer (atoi) | 🟡 Medium | C++ |
@@ -689,7 +690,6 @@
 | 16 Sep 2026 | Rectangle Overlap | 🟢 Easy | Elixir |
 | 16 Sep 2026 | Count Commas in Range | 🟢 Easy | C# |
 | 16 Sep 2026 | Search Insert Position | 🟢 Easy | Java |
-| 15 Aug 2026 | Maximum Length Substring With Two Occurrences | 🟢 Easy | C++ |
 
 ---
 
