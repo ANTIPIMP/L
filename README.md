@@ -14,12 +14,12 @@
 
 | Metric | Count |
 |---------|------:|
-| Problemsss Solved | 68 |
+| Problems Solved | 68 |
 | Easy | 27 |
 | Medium | 30 |
 | Hard | 11 |
 | Languages | Bash, C, C#, C++, Dart, Elixir, Erlang, Go, Java, JavaScript, Kotlin, MS SQL Server, MySQL, Oracle SQL, PHP, PostgreSQL, Python, Python3, Racket, Ruby, Rust, Scala, Swift, TypeScript, pythondata |
-| Last Sync | 18 Sep 2026 |
+| Last Sync | 02 Oct 2026 |
 
 ---
 
@@ -680,6 +680,7 @@
 
 | Date | Problem | Difficulty | Language |
 |------|----------|------------|----------|
+| 02 Oct 2026 | Valid Parentheses | 🟢 Easy | C++ |
 | 17 Sep 2026 | Partition Equal Subset Sum | 🟡 Medium | C++ |
 | 16 Sep 2026 | Daily Temperatures | 🟡 Medium | C++ |
 | 16 Sep 2026 | Delete and Earn | 🟡 Medium | C++ |
@@ -689,7 +690,6 @@
 | 16 Sep 2026 | Sqrt(x) | 🟢 Easy | C++ |
 | 16 Sep 2026 | Rectangle Overlap | 🟢 Easy | Elixir |
 | 16 Sep 2026 | Count Commas in Range | 🟢 Easy | C# |
-| 16 Sep 2026 | Search Insert Position | 🟢 Easy | Java |
 
 ---
 

@@ -31,7 +31,7 @@
       "TypeScript",
       "pythondata"
     ],
-    "lastSync": "18 Sep 2026"
+    "lastSync": "02 Oct 2026"
   },
   "problems": [
     {
@@ -1823,13 +1823,12 @@
         {
           "filename": "solution.cpp",
           "language": "cpp",
-          "code": "#include <stack>\n#include <string>\nusing namespace std;\n\nclass Solution {\npublic:\n    bool isValid(string s) {\n        stack<char> st;\n        for (char ch : s) {\n            if (ch == '(' || ch == '[' || ch == '{') {\n                st.push(ch);\n            } else {\n                if (st.empty()) {\n                    return false;\n                }\n                char top = st.top();\n                st.pop();\n                if (ch == ')' && top != '(') return false;\n                if (ch == ']' && top != '[') return false;\n                if (ch == '}' && top != '{') return false;\n            }\n        }\n        return st.empty();\n    }\n};",
+          "code": "class Solution {\npublic:\n    bool isValid(string s) {\n        if (s.length() % 2 != 0) return false;\n\n        vector<char> stack(s.length());\n        int head = 0;\n\n        for (char c : s) {\n            if (c == '(') {\n                stack[head++] = ')';\n            } else if (c == '{') {\n                stack[head++] = '}';\n            } else if (c == '[') {\n                stack[head++] = ']';\n            } else {\n                if (head == 0 || stack[--head] != c) {\n                    return false;\n                }\n            }\n        }\n\n        return head == 0;\n    }\n};",
           "runtime": "0 ms",
-          "memory": "8.9 MB",
+          "memory": "8.5 MB",
           "status": "Accepted",
-          "timestamp": 1784217077,
-          "note": "",
-          "id": 2070081745
+          "timestamp": 1790880852,
+          "id": 2159547727
         }
       ],
       "questionId": "20",
